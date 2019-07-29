@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Design System for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>Binary Game - Gamble with Yeet!Coin, be a bro!</title>
+  <!-- Favicon -->
+  <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Icons -->
+  <link href="./assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
+  <link href="./assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Argon CSS -->
+  <link type="text/css" href="./assets/css/argon.css?v=1.1.0" rel="stylesheet">
+</head>
+
+<body>
+  <header class="header-global">
+    <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom">
+      <div class="container">
+        <a class="navbar-brand mr-lg-5" href="./index.html"><img src="./assets/img/brand/white.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbar_global">
+          <div class="navbar-collapse-header">
+            <div class="row">
+              <div class="col-6 collapse-brand">
+                <a href="./index.html">
+                  <img src="./assets/img/brand/blue.png">
+                </a>
+              </div>
+              <div class="col-6 collapse-close">
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+                  <span></span>
+                  <span></span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link" data-toggle="dropdown" role="button">
+                <i class="ni ni-ui-04 d-lg-none"></i>
+                <span class="nav-link-inner--text">How to Play</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-xl">
+                <div class="dropdown-menu-inner">
+                  <a href="https://demos.creative-tim.com/argon-design-system/docs/getting-started/overview.html" class="media d-flex align-items-center">
+                    <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
+                      <i class="ni ni-spaceship"></i>
+                    </div>
+                    <div class="media-body ml-3">
+                      <h6 class="heading text-primary mb-md-1">Getting started</h6>
+                      <p class="description d-none d-md-inline-block mb-0">Learn how to use Argon compiling Scss, change brand colors and more.</p>
+                    </div>
+                  </a>
+                  <a href="https://demos.creative-tim.com/argon-design-system/docs/foundation/colors.html" class="media d-flex align-items-center">
+                    <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
+                      <i class="ni ni-palette"></i>
+                    </div>
+                    <div class="media-body ml-3">
+                      <h6 class="heading text-primary mb-md-1">Foundation</h6>
+                      <p class="description d-none d-md-inline-block mb-0">Learn more about colors, typography, icons and the grid system we used for Argon.</p>
+                    </div>
+                  </a>
+                  <a href="https://demos.creative-tim.com/argon-design-system/docs/components/alerts.html" class="media d-flex align-items-center">
+                    <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
+                      <i class="ni ni-ui-04"></i>
+                    </div>
+                    <div class="media-body ml-3">
+                      <h5 class="heading text-warning mb-md-1">Components</h5>
+                      <p class="description d-none d-md-inline-block mb-0">Browse our 50 beautiful handcrafted components offered in the Free version.</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link" data-toggle="dropdown" role="button">
+                <i class="ni ni-collection d-lg-none"></i>
+                <span class="nav-link-inner--text">Help</span>
+              </a>
+              <div class="dropdown-menu">
+                <a href="./examples/landing.html" class="dropdown-item">About Us</a>
+                <a href="./examples/login.html" class="dropdown-item">FAQ</a>
+                <a href="./examples/register.html" class="dropdown-item">Contact Us</a>
+                <a href="./examples/profile.html" class="dropdown-item">Privacy Policy</a>
+
+              </div>
+            </li>
+          </ul>
+          <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+            <li class="nav-item">
+              <a class="nav-link nav-link-icon" href="https://www.facebook.com/creativetim" target="_blank" data-toggle="tooltip" title="Like us on Facebook">
+                <i class="fa fa-facebook-square"></i>
+                <span class="nav-link-inner--text d-lg-none">Facebook</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-icon" href="https://www.instagram.com/creativetimofficial" target="_blank" data-toggle="tooltip" title="Follow us on Instagram">
+                <i class="fa fa-instagram"></i>
+                <span class="nav-link-inner--text d-lg-none">Instagram</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-icon" href="https://twitter.com/creativetim" target="_blank" data-toggle="tooltip" title="Follow us on Twitter">
+                <i class="fa fa-twitter-square"></i>
+                <span class="nav-link-inner--text d-lg-none">Twitter</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-icon" href="https://github.com/creativetimofficial/argon-design-system" target="_blank" data-toggle="tooltip" title="Star us on Github">
+                <i class="fa fa-github"></i>
+                <span class="nav-link-inner--text d-lg-none">Github</span>
+              </a>
+            </li>
+            <li class="nav-item d-none d-lg-block ml-lg-4">
+              <a href="https://www.creative-tim.com/product/argon-design-system" target="_blank" class="btn btn-neutral btn-icon">
+                <span class="btn-inner--icon">
+                  <i class="fa fa-money mr-2"></i>
+                </span>
+                <span class="nav-link-inner--text">Buy Yeet!Coin</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <!--
+
+=========================================================
+* Argon Design System - v1.1.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/argon-design-system
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+    <div class="position-relative">
+      <!-- Hero for FREE version -->
+      <section class="section section-lg section-hero section-shaped">
+        <!-- Background circles -->
+        <div class="shape shape-style-1 shape-primary">
+          <span class="span-150"></span>
+          <span class="span-50"></span>
+          <span class="span-50"></span>
+          <span class="span-75"></span>
+          <span class="span-100"></span>
+          <span class="span-75"></span>
+          <span class="span-50"></span>
+          <span class="span-100"></span>
+          <span class="span-50"></span>
+          <span class="span-100"></span>
+        </div>
+        <div class="container shape-container d-flex align-items-center">
+          <div class="col px-0">
+            <div class="row align-items-center justify-content-center">
+              <div class="col-lg-3 text-center shadow-lg">
+                <h6 class="text-white">BTC Last Price</h6>
+                <h3 class="text-white" style="font-weight:600">$1,203.00</h3>
+              </div>
+
+              <div class="col-lg-6 text-center">
+                <img src="./assets/img/brand/white.png" style="width: 200px;" class="img-fluid">
+                <p class="lead text-white">A fast-paced gambling portal for crypto degenerates like you. Stronger than fentanyl.</p>
+                <!--
+                <div class="btn-wrapper mt-5">
+                  <a href="https://www.creative-tim.com/product/argon-design-system" class="btn btn-lg btn-white btn-icon mb-3 mb-sm-0">
+                    <span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
+                    <span class="btn-inner--text">Sign up and get 300 Dildos</span>
+                  </a>
+                  <a href="https://github.com/creativetimofficial/argon-design-system" class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank">
+                    <span class="btn-inner--icon"><i class="fa fa-github"></i></span>
+                    <span class="btn-inner--text"><span class="text-warning">Star us</span> on Github</span>
+                  </a>
+                </div>
+              -->
+                
+              </div>
+              <div class="col-lg-3 text-center  shadow-lg">
+                <h1 class="text-white" style="font-weight:800">05:11:23</h1>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- SVG separator -->
+        <div class="separator separator-bottom separator-skew zindex-100">
+          <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+          </svg>
+        </div>
+      </section>
+    </div>
+
+    <section class="section section-components pb-0 has-cards" id="section-components">
+      <div class="container position-relative row" style="bottom:250px;z-index:1;margin:0 auto;">
+
+        <div class="col-lg-4 mb-lg-auto">            
+            <div class="card align-items-center shadow-lg rounded card-lift--hover" style="width:300px;background-color:#7b539e;">
+              <h2 class="mb-5">
+                <span class="text-white">BTC/USD</span>
+              </h2>
+              <button class="btn btn-icon btn-3 btn-success" type="button">
+                <span class="btn-inner--icon"><i class="ni ni-bold-up"></i></span>
+                  <span class="btn-inner--text">Enter MEWN</span>
+              </button>
+
+              <button class="btn btn-icon btn-3 btn-danger" type="button">
+                <span class="btn-inner--icon"><i class="ni ni-bold-down"></i></span>
+
+                  <span class="btn-inner--text">Enter ReKKt</span>
+              </button>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-lg-auto ">
+            <div class="card align-items-center shadow-lg rounded card-lift--hover" style="width:300px;background-color:#7b539e;">
+              <h2 class="mb-5">
+                <span class="text-white">BTC/USD</span>
+              </h2>
+              <button class="btn btn-icon btn-3 btn-success" type="button">
+                <span class="btn-inner--icon"><i class="ni ni-bold-up"></i></span>
+                  <span class="btn-inner--text">Enter MEWN</span>
+              </button>
+
+              <button class="btn btn-icon btn-3 btn-danger" type="button">
+                <span class="btn-inner--icon"><i class="ni ni-bold-down"></i></span>
+
+                  <span class="btn-inner--text">Enter ReKKt</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mb-lg-auto">
+            <div class="card align-items-center shadow-lg rounded card-lift--hover" style="width:300px;background-color:#7b539e;">
+              <h2 class="mb-5">
+                <span class="text-white">BTC/USD</span>
+              </h2>
+              <button class="btn btn-icon btn-3 btn-success" type="button">
+                <span class="btn-inner--icon"><i class="ni ni-bold-up"></i></span>
+                  <span class="btn-inner--text">Enter MEWN</span>
+              </button>
+
+              <button class="btn btn-icon btn-3 btn-danger" type="button">
+                <span class="btn-inner--icon"><i class="ni ni-bold-down"></i></span>
+
+                  <span class="btn-inner--text">Enter ReKKt</span>
+              </button>
+            </div>
+          </div>
+
+  
+
+
+      </div>
+    </section>
+    <section>
+      <div class="container align-items-center">
+       <!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div id="tradingview_2332f"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BITSTAMP-BTCUSD/" rel="noopener" target="_blank"><span class="blue-text">BTCUSD Chart</span></a> by TradingView</div>
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+  <script type="text/javascript">
+      new TradingView.widget(
+      {
+      "autosize": true,
+      "symbol": "BITSTAMP:BTCUSD",
+      "interval": "1",
+      "timezone": "Etc/UTC",
+      "theme": "Light",
+      "style": "1",
+      "locale": "en",
+      "toolbar_bg": "#f1f3f6",
+      "enable_publishing": false,
+      "save_image": false,
+      "calendar": true,
+      "container_id": "tradingview_2332f"
+    }
+      );
+  </script>
+</div>
+<!-- TradingView Widget END -->
+      </div>
+
+    </section>
+    
+  </main>
+  <footer class="footer has-cards">
+  
+    <div class="container">
+     
+      <hr>
+      <div class="row align-items-center justify-content-md-between">
+        <div class="col-md-6">
+          <div class="copyright">
+            &copy; 2019 <a href="#" target="_blank">Binary Game Inc. / Yeet!Coin</a>.
+          </div>
+        </div>
+        <div class="col-md-6">
+          <ul class="nav nav-footer justify-content-end">
+            <li class="nav-item">
+              <a href="#" class="nav-link" target="_blank">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link" target="_blank">Privacy Policy</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link" target="_blank">Terms of Service</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link" target="_blank">Support</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Core -->
+  <script src="./assets/vendor/jquery/jquery.min.js"></script>
+  <script src="./assets/vendor/popper/popper.min.js"></script>
+  <script src="./assets/vendor/bootstrap/bootstrap.min.js"></script>
+  <script src="./assets/vendor/headroom/headroom.min.js"></script>
+  <!-- Optional JS -->
+  <script src="./assets/vendor/onscreen/onscreen.min.js"></script>
+  <script src="./assets/vendor/nouislider/js/nouislider.min.js"></script>
+  <script src="./assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+  <!-- Argon JS -->
+  <script src="./assets/js/argon.js?v=1.1.0"></script>
+</body>
+
+</html>
