@@ -16,6 +16,8 @@
   <link href="./assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="./assets/css/argon.css?v=1.1.0" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fingerprintjs/0.5.3/fingerprint.min.js"></script>
 </head>
 
 <body>
@@ -136,7 +138,7 @@
 
     <div class="position-relative">
       <!-- Hero for FREE version -->
-      <section class="section section-lg section-hero section-shaped">
+      <section class="section section-lg section-hero section-shaped" id="ticker">
         <!-- Background circles -->
         <div class="shape shape-style-1 shape-primary">
           <span class="span-150"></span>
@@ -155,7 +157,7 @@
             <div class="row align-items-center justify-content-center">
               <div class="col-lg-3 text-center shadow-lg">
                 <h6 class="text-white">BTC Last Price</h6>
-                <h3 class="text-white" style="font-weight:600">$1,203.00</h3>
+                <h3 class="text-white" style="font-weight:600">${{ btc_price }}</h3>
               </div>
 
               <div class="col-lg-6 text-center">
@@ -176,7 +178,7 @@
                 
               </div>
               <div class="col-lg-3 text-center  shadow-lg">
-                <h1 class="text-white" style="font-weight:800">05:11:23</h1>
+                <h1 class="text-white" style="font-weight:800">{{ time_ticker }}</h1>
               </div>
 
             </div>
@@ -213,7 +215,7 @@
         </div>
 
         <div class="col-lg-4 mb-lg-auto ">
-            <div class="card align-items-center shadow-lg rounded card-lift--hover" style="width:300px;background-color:#7b539e;">
+            <div class="card align-items-center shadow-lg rounded active-card" style="width:300px;background-color:#7b539e;">
               <h2 class="mb-5">
                 <span class="text-white">BTC/USD</span>
               </h2>
@@ -316,6 +318,73 @@
       </div>
     </div>
   </footer>
+  <!-- VueJS -->
+  <script>
+      var app = new Vue({
+      el: '#ticker',
+      data: {
+        time_ticker: '05:00:00',
+        end_time: Date.parse(new Date()) + 60 * 5 * 1000,
+        remaining_time:null,
+        time_interval:null,
+        btc_price:null,
+        user_fingerprint:null
+
+      },
+      computed: {
+        get_remaining_time: function()
+        {
+          let t = this.remaining_time;
+          if (t<0) { return false; }
+          var seconds = Math.floor((t / 1000) % 60).toString();
+          var minutes = Math.floor((t / 1000 / 60) % 60).toString();
+          var hours = Math.floor((t / (1000 * 60 * 60)) % 24).toString();
+          var days = Math.floor(t / (1000 * 60 * 60 * 24)).toString();
+          if (hours.length == 1) hours = '0' + hours;
+          if (minutes.length == 1) minutes = '0' + minutes;
+          if (seconds.length == 1) seconds = '0' + seconds;
+
+          return hours + ':' + minutes + ':' + seconds;
+        },
+      },
+      methods: {
+        get_fingerprint: function()
+        {
+          this.user_fingerprint = new Fingerprint({canvas: true}).get();
+          console.log('user_fingerprint: ' + this.user_fingerprint);
+        },
+        update_btc: function()
+        {
+           $.getJSON('https://api.coindesk.com/v1/bpi/currentprice/USD.json', (data)=> {
+                this.btc_price = data.bpi.USD.rate;
+                console.log('btc_price: ' + data.bpi.USD.rate);
+            });
+        },
+        update_time: function()
+        {
+          this.remaining_time = this.end_time - Date.parse(new Date());
+          let t = this.get_remaining_time;
+          this.time_ticker = t;
+          if (!t) clearInterval(this.time_interval);
+        }
+      },
+      mounted: function(){
+        let d = new Date();
+        this.time_interval = setInterval(()=>{
+          this.update_time();
+          this.update_btc();
+        },1000);
+        this.get_fingerprint();
+      }
+    })
+  </script>
+  <style>
+    .active-card {
+      padding:50px;
+      position:relative;
+      bottom:50px;
+    }
+  </style>
   <!-- Core -->
   <script src="./assets/vendor/jquery/jquery.min.js"></script>
   <script src="./assets/vendor/popper/popper.min.js"></script>
@@ -327,6 +396,7 @@
   <script src="./assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
   <!-- Argon JS -->
   <script src="./assets/js/argon.js?v=1.1.0"></script>
-</body>
 
+
+</body>
 </html>
