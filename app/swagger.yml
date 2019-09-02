@@ -1,0 +1,1249 @@
+swagger: "2.0"
+info:
+  description: This is the REST API for Project Artemis
+  version: "1.0.0"
+  title: Project Artemis REST API
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+# Paths supported by the server application
+paths:
+
+  # ====
+  # User
+  # ====
+
+  /users:
+    get:
+      operationId: user.read_all
+      tags:
+        - User
+      summary: Retrieve a list of users in the system
+      description: Retrieve all users in the system
+      parameters:
+        - name: user_ids
+          in: query
+          description: Array of user IDs, if blank all users will be returned
+          type: array
+          items:
+            type: integer
+      responses:
+        200:
+          description: Successfully read user set operation
+          schema:
+            type: array
+            items:
+              properties:
+                user_id:
+                  type: integer
+                  description: System ID of the user
+                user_fingerprint:
+                  type: string
+                  description: Unique browser fingerprint hash of the user so we're able to track them an ensure they do not create multiple accounts
+                user_email:
+                  type: string
+                  description: Email address of the user used for registration. This cannot be changed.
+                user_name_display:
+                  type: string
+                  description: The display name of the user on the website as seen by other users, changeable by the user
+                user_name:
+                  type: string
+                  description: The static and unique user name of the user upon registration. This is used in finding the user and used for their profile URL
+                user_avatar:
+                  type: string
+                  description: URL to the cloud bucket object containing the user's uploaded avatar
+                user_photo_id:
+                  type: string
+                  description: Private URL to the cloud bucket object containing the user's Government issued photo ID
+                user_did_kyc:
+                  type: integer
+                  description: Flag whether the user fulfilled our 3rd-party Know Your Customer process. Users may not trade without fulfilling this.
+                user_did_aml:
+                  type: integer
+                  description: Flag whether the user fulfilled our Anti Money Laundering process. Users may not trade without fulfilling this.
+                user_status:
+                  type: integer
+                  description: System status of the user, 0 = User has no confirmed their email, 1 = User has confirmed their email, 2 = User is validated and completed requisite KYC/AM and can trade, 3 = User is suspended from the system temporarily (likely investigation), 4 = User has been banned from the system
+                user_wallet_address:
+                  type: string
+                  description: The wallet address of our system token for the user. The user must create their own wallet externally and input their wallet address. System wallet addresses are unique to each user preventing users from opening multiple accounts. This wallet address is used for cashing out their wins.
+                user_wallet_address_eth:
+                  type: string
+                  description: The user's Ethereum wallet address, used for confirming deposits externally on the block chain
+                user_wallet_address_btc:
+                  type: string
+                  description: The user's Bitcoin wallet address, used for confirming deposits externally on the block chain
+                user_wallet_address_xmr:
+                  type: string
+                  description: The user's Monero wallet address, used for confirming deposits externally on the block chain
+                user_register_ip:
+                  type: string
+                  description: IP address of the user used when registering
+                user_last_ip:
+                  type: string
+                  description: Last IP address of the user used when logging in
+                user_referral_code:
+                  type: string
+                  description: The user's referral code
+                user_tcreate:
+                  type: string
+                  description: Datetime of when the user registered
+                user_tmodified:
+                  type: string
+                  description: Datetime of when the user's account was last updated
+                user_tlogin:
+                  type: string
+                  description: Datetime of when the user last logged into the system
+
+  /user:
+    post:
+      operationId: user.create
+      tags:
+        - User
+      summary: Add a user to the system
+      description: Add a user to the system database
+      parameters:
+        - name: user
+          in: body
+          description: User you would like to add
+          required: True
+          schema:
+            type: object
+            properties:
+              user_email:
+                type: string
+                description: User's unique email address
+              user_name:
+                type: string
+                description: Public user name of the user
+              user_fingerprint:
+                type: string
+                description: User's browser fingerprint hash
+              user_register_ip:
+                type: string
+                description: IP address of user during registration
+      responses:
+        201:
+          description: User successfully added
+          schema:
+            properties:
+              user_id:
+                type: integer
+                description: User's ID
+
+
+
+
+  /user/{user_id}:
+    get:
+      operationId: user.read_one
+      tags:
+        - User
+      summary: Grab a user's profile information
+      description: Grab a user's profile information
+      parameters:
+        - name: user_id
+          in: path
+          description: User ID of the user
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully fetched the user's profile
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+                description: User's ID
+              user_email:
+                type: string
+                description: User's unique email address
+              user_name:
+                type: string
+                description: Public user name of the user
+              user_fingerprint:
+                type: string
+                description: User's browser fingerprint hash
+              user_name_display:
+                type: string
+                description: User's display name
+              user_avatar:
+                type: string
+                description: User's profile avatar
+              user_referral_code:
+                type: string
+                description: User's referral code
+              user_wallet_address:
+                type: string
+                description: User's wallet address
+              user_did_kyc:
+                type: boolean
+                description: Whether the user completed KYC
+              user_did_aml:
+                type: boolean
+                description: Whether the user completed AML
+              user_tcreate:
+                type: string
+                description: Datetime the user registered
+              user_tlogin:
+                type: string
+                description: Datetime of user's last login
+
+    put:
+      operationId: user.update
+      tags:
+        - User
+      summary: Update the user's profile
+      description: Update the user's profile
+      parameters:
+        - name: user_id
+          in: path
+          description: User's system user ID
+          type: integer
+          required: True
+        - name: user
+          in: body
+          schema:
+            type: object
+            properties:
+              user_fingerprint:
+                type: string
+                description: User's browser fingerprint hash
+              user_name_display:
+                type: string
+                description: User's display name
+              user_photo_id:
+                type: string
+                description: Private URL to the cloud bucket object containing the user's Government issued photo ID
+              user_avatar:
+                type: string
+                description: User's profile avatar
+              user_wallet_address:
+                type: string
+                description: User's wallet address
+              user_did_kyc:
+                type: boolean
+                description: Whether the user completed KYC
+              user_did_aml:
+                type: boolean
+                description: Whether the user completed AML
+              user_wallet_address_eth:
+                type: string
+                description: The user's Ethereum wallet address, used for confirming deposits externally on the block chain
+              user_wallet_address_btc:
+                type: string
+                description: The user's Bitcoin wallet address, used for confirming deposits externally on the block chain
+              user_wallet_address_xmr:
+                type: string
+                description: The user's Monero wallet address, used for confirming deposits externally on the block chain
+              user_register_ip:
+                type: string
+                description: IP address of the user used when registering
+              user_last_ip:
+                type: string
+                description: Last IP address of the user used when logging in
+              user_tlogin:
+                type: string
+                description: Datetime of user's last login
+      responses:
+        200:
+          description: Successfully updated the user's profile
+          schema:
+            properties:
+              user_id:
+                type: integer
+                description: User's system user ID
+
+    delete:
+      operationId: user.delete
+      tags:
+        - User
+      summary: Remove a user
+      description: Remove a user
+      parameters:
+        - name: user_id
+          in: path
+          type: integer
+          description: ID of the user to remove
+          required: true
+      responses:
+        200:
+          description: Successfully removed the user
+
+
+  # ===========
+  # Transaction
+  # ===========
+
+  /transactions:
+    get:
+      operationId: transaction.read_all
+      tags:
+        - Transaction
+      summary: Retrieve a list of transactions in the system
+      description: Retrieve all transactions in the system
+      parameters:
+        - name: transaction_ids
+          in: query
+          description: Array of transaction IDs, if blank all transactions will be returned
+          type: array
+          items:
+            type: integer
+      responses:
+        200:
+          description: Successfully retrieved transactions
+          schema:
+            type: array
+            items:
+              properties:
+                transaction_id:
+                  type: integer
+                  description: System ID of the transaction
+                user_id:
+                  type: integer
+                  description: ID of the user creating the transaction
+                pool_id:
+                  type: integer
+                  description: System ID of the Pool the related to the transaction
+                pool_hash:
+                  type: string
+                  description: System hash of the Pool related to the transaction
+                transaction_amount_buy:
+                  type: number
+                  description: The amount the user committed to the BUY (Crush) action for the pool or the amount the user deposited into the system
+                transaction_amount_sell:
+                  type: number
+                  description: The amount the user committed to the SELL (Crater) action for the pool
+                transaction_is_deposit:
+                  type: boolean
+                  description: Whether the transaction was a deposit into the user's account
+                transaction_wallet_to:
+                  type: string
+                  description: The payee's wallet address, set as null if it is a deposit
+                transaction_wallet_from:
+                  type: string
+                  description: The payer's wallet address and account to debit from, set to null if its a payout from a pool
+                transaction_status:
+                  type: integer
+                  description: Status of the transaction, 0 = the transaction is being processed, usually after the close of a pool, 1 = This is a transaction paying someone out from winning, -1 = This is a transaction being debited from someone losing, 2 = A deposit transaction from a user to the system, 3 = Transaction is cancelled
+                transaction_tcreate:
+                  type: string
+                  description: Datetime the transaction was initiated
+                transaction_tmodified:
+                  type: string
+                  description: Datetime the transaction was modified
+                user:
+                  type: object
+                  properties:
+                    user_id:
+                      type: string
+                      description: User's system user ID
+                    user_name:
+                      type: string
+                      description: User's public system name
+                    user_name_display:
+                      type: string
+                      description: User's display name
+                    user_avatar:
+                      type: string
+                      description: User's profile avatar
+                    user_last_ip:
+                      type: string
+                      description: Last IP address of the user used when logging in
+                    user_tcreate:
+                      type: string
+                      description: Datetime of when the user registered
+                    user_status:
+                      type: integer
+                      description: System status of the user, 0 = User has no confirmed their email, 1 = User has confirmed their email, 2 = User is validated and completed requisite KYC/AM and can trade, 3 = User is suspended from the system temporarily (likely investigation), 4 = User has been banned from the system
+                    user_tmodified:
+                      type: string
+                      description: Datetime of when the user's account was last updated
+                    user_tlogin:
+                      type: string
+                      description: Datetime of when the user last logged into the system
+
+  /transactions/{user_id}:
+    get:
+      operationId: transaction.read_user_transactions
+      tags:
+        - Transaction
+      summary: Get all of a user's transactions from the system
+      description: Get all of a user's transactions from the system
+      parameters:
+        - name: user_id
+          in: path
+          description: User ID of the user
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully fetched the user's transactions
+          schema:
+            type: object
+            properties:
+              transactions:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    transaction_id:
+                      type: integer
+                      description: ID of the transaction
+                    pool_id:
+                      type: integer
+                      description: System ID of the Pool the related to the transaction
+                    pool_hash:
+                      type: string
+                      description: System hash of the Pool related to the transaction
+                    transaction_amount_buy:
+                      type: number
+                      description: The amount the user committed to the BUY (Crush) action for the pool or the amount the user deposited into the system
+                    transaction_amount_sell:
+                      type: number
+                      description: The amount the user committed to the SELL (Crater) action for the pool
+                    transaction_is_deposit:
+                      type: boolean
+                      description: Whether the transaction was a deposit into the user's account
+                    transaction_wallet_to:
+                      type: string
+                      description: The payee's wallet address, set as null if it is a deposit
+                    transaction_wallet_from:
+                      type: string
+                      description: The payer's wallet address and account to debit from, set to null if its a payout from a pool
+                    transaction_status:
+                      type: integer
+                      description: Status of the transaction, 0 = the transaction is being processed, usually after the close of a pool, 1 = This is a transaction paying someone out from winning, -1 = This is a transaction being debited from someone losing, 2 = A deposit transaction from a user to the system, 3 = Transaction is cancelled
+                    transaction_tcreate:
+                      type: string
+                      description: Datetime the transaction was initiated
+                    transaction_tmodified:
+                      type: string
+                      description: Datetime the transaction was modified
+                    pool:
+                      type: object
+                      properties:
+                        pool_id:
+                          type: integer
+                          description: ID of the pool
+                        pool_hash:
+                          type: string
+                          description: Unique hash public identifier for the pool
+                        pool_pair:
+                          type: string
+                          description: Trading pair of the pool
+                        pool_locked_price:
+                          type: number
+                          description: The locked in price of the pool to beat prior to the pool starting
+                        pool_close_price:
+                          type: number
+                          description: The actual price of the pool at the end
+                        pool_amount_buy:
+                          type: number
+                          description: Total soft currency pooled by users for BUY action (CRUSH)
+                        pool_amount_sell:
+                          type: number
+                          description: Total soft currency pooled by users for SELL action (CRATER)
+                        pool_multiplier_buy:
+                          type: number
+                          description: The multiplier for the buy side
+                        pool_multiplier_sell:
+                          type: number
+                          description: The multiplier for the sell side
+                        pool_fee_type:
+                          type: string
+                          description: The pool fee type, 0 = no fee, 1 = a fixed fee in soft currency, 2 = a percentage of the total pool
+                        pool_fee_amount:
+                          type: number
+                          description: The fee amount taken by the system for services rendered, thankyamuch ;)
+                        pool_status:
+                          type: integer
+                          description: Status of the pool, 0 = No betting, 1 = Open for betting, 2 = No more betting, pool countdown begins, 3 = Time has expired, no payouts yet, 4 = Payouts complete, 5 = Under review
+                        pool_tcreate:
+                          type: string
+                          description: UTC datetime the pool was created
+                        pool_tmodified:
+                          type: string
+                          description: UTC datetime the pool was modified
+                        pool_tstart:
+                          type: string
+                          description: UTC datetime the pool starts
+                        pool_topen:
+                          type: string
+                          description: UTC datetime the pool was open for betting
+                        pool_tlock:
+                          type: string
+                          description: UTC datetime the pool was locked from betting
+                        pool_texpire:
+                          type: string
+                          description: UTC datetime the pool expired and calculation distribution begins
+                        pool_tclose:
+                          type: string
+                          description: UTC datetime the pool results are calculated and distributed and finally closed for archive
+                        pool_treview:
+                          type: string
+                          description: UTC datetime the pool went under review for suspicious activity or bugs
+
+
+
+  /transaction:
+    post:
+      operationId: transaction.create
+      tags:
+        - Transaction
+      summary: Create a transaction associated with the user
+      description: Create a transaction associated with the user
+      parameters:
+        - name: transaction
+          in: body
+          description: Details of the transaction
+          required: True
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+                description: ID of the user creating the transaction
+              pool_id:
+                type: integer
+                description: System ID of the Pool the related to the transaction
+              pool_hash:
+                type: string
+                description: System hash of the Pool related to the transaction
+              transaction_amount_buy:
+                type: number
+                description: The amount the user committed to the BUY (Crush) action for the pool or the amount the user deposited into the system
+              transaction_amount_sell:
+                type: number
+                description: The amount the user committed to the SELL (Crater) action for the pool
+              transaction_is_deposit:
+                type: boolean
+                description: Whether the transaction was a deposit into the user's account
+              transaction_wallet_to:
+                type: string
+                description: The payee's wallet address, set as null if it is a deposit
+              transaction_wallet_from:
+                type: string
+                description: The payer's wallet address and account to debit from, set to null if its a payout from a pool
+              transaction_status:
+                type: integer
+                description: Status of the transaction, 0 = the transaction is being processed, usually after the close of a pool, 1 = This is a transaction paying someone out from winning, -1 = This is a transaction being debited from someone losing, 2 = A deposit transaction from a user to the system, 3 = Transaction is cancelled
+              transaction_tcreate:
+                type: string
+                description: Datetime the transaction was initiated
+              transaction_tmodified:
+                type: string
+                description: Datetime the transaction was modified
+      responses:
+        201:
+          description: Successfully created transaction
+          schema:
+            properties:
+              user_id:
+                type: integer
+                description: User's system user ID
+              transaction_id:
+                type: integer
+                description: ID of the transaction
+              transaction_tcreate:
+                type: string
+                description: UTC datetime of the transaction
+
+  /transaction/{transaction_id}:
+    get:
+      operationId: transaction.read_one
+      tags:
+        - Transaction
+      summary: View a particular transaction ID
+      description: View a particular transaction ID
+      parameters:
+        - name: transaction_id
+          in: path
+          description: Transaction ID
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully retrieved transaction
+          schema:
+            type: object
+            properties:
+              transaction_id:
+                type: integer
+                description: ID of the transaction
+              user_id:
+                type: integer
+                description: ID of the user creating the transaction
+              pool_id:
+                type: integer
+                description: System ID of the Pool the related to the transaction
+              pool_hash:
+                type: string
+                description: System hash of the Pool related to the transaction
+              transaction_amount_buy:
+                type: number
+                description: The amount the user committed to the BUY (Crush) action for the pool or the amount the user deposited into the system
+              transaction_amount_sell:
+                type: number
+                description: The amount the user committed to the SELL (Crater) action for the pool
+              transaction_is_deposit:
+                type: boolean
+                description: Whether the transaction was a deposit into the users account
+              transaction_wallet_to:
+                type: string
+                description: The payee wallet address, set as null if it is a deposit
+              transaction_wallet_from:
+                type: string
+                description: The payers wallet address and account to debit from, set to null if its a payout from a pool
+              transaction_status:
+                type: integer
+                description: Status of the transaction, 0 = the transaction is being processed, usually after the close of a pool, 1 = This is a transaction paying someone out from winning, -1 = This is a transaction being debited from someone losing, 2 = A deposit transaction from a user to the system, 3 = Transaction is cancelled
+              transaction_tcreate:
+                type: string
+                description: Datetime the transaction was initiated
+              transaction_tmodified:
+                type: string
+                description: Datetime the transaction was modified
+
+    put:
+      operationId: transaction.update
+      tags:
+        - Transaction
+      summary: Update a transaction associated with a user
+      description: Update a transaction associated with a user
+      parameters:
+        - name: user_id
+          in: path
+          description: User's ID
+          type: integer
+          required: True
+        - name: transaction_id
+          in: path
+          description: Transaction ID
+          type: integer
+          required: True
+        - name: transaction
+          in: body
+          schema:
+            type: object
+            properties:
+              transaction_status:
+                type: integer
+                description: Status of the transaction, 0 = the transaction is being processed, usually after the close of a pool, 1 = This is a transaction paying someone out from winning, -1 = This is a transaction being debited from someone losing, 2 = A deposit transaction from a user to the system, 3 = Transaction is cancelled
+      responses:
+        200:
+          description: Successfully updated transaction
+          schema:
+            properties:
+              transaction_id:
+                type: string
+                description: Transaction's ID
+              user_id:
+                type: integer
+                description: User's ID
+              transaction_status:
+                type: integer
+                description: Status of the transaction, 0 = the transaction is being processed, usually after the close of a pool, 1 = This is a transaction paying someone out from winning, -1 = This is a transaction being debited from someone losing, 2 = A deposit transaction from a user to the system, 3 = Transaction is cancelled
+
+    delete:
+      operationId: transaction.delete
+      tags:
+        - Transaction
+      summary: Delete a user's transaction
+      description: Delete a user's transaction
+      parameters:
+        - name: transaction_id
+          in: path
+          description: Transaction ID
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully deleted a transaction
+
+
+  # ====
+  # Pool
+  # ====
+
+  /pools:
+    get:
+      operationId: pool.read_all
+      tags:
+        - Pool
+      summary: Retrieve a list of pools in the system
+      description: Retrieve all pools in the system
+      parameters:
+        - name: pool_ids
+          in: query
+          description: Array of pool IDs, if blank all pools will be returned
+          type: array
+          items:
+            type: integer
+      responses:
+        200:
+          description: Successfully retrieved pools
+          schema:
+            type: array
+            items:
+              properties:
+                pool_id:
+                  type: integer
+                  description: ID of the pool
+                pool_hash:
+                  type: string
+                  description: Unique hash public identifier for the pool
+                pool_pair:
+                  type: string
+                  description: Trading pair of the pool
+                pool_locked_price:
+                  type: number
+                  description: The locked in price of the pool to beat prior to the pool starting
+                pool_close_price:
+                  type: number
+                  description: The actual price of the pool at the end
+                pool_amount_buy:
+                  type: number
+                  description: Total soft currency pooled by users for BUY action (CRUSH)
+                pool_amount_sell:
+                  type: number
+                  description: Total soft currency pooled by users for SELL action (CRATER)
+                pool_multiplier_buy:
+                  type: number
+                  description: The multiplier for the buy side
+                pool_multiplier_sell:
+                  type: number
+                  description: The multiplier for the sell side
+                pool_fee_type:
+                  type: string
+                  description: The pool fee type, 0 = no fee, 1 = a fixed fee in soft currency, 2 = a percentage of the total pool
+                pool_fee_amount:
+                  type: number
+                  description: The fee amount taken by the system for services rendered, thankyamuch ;)
+                pool_status:
+                  type: integer
+                  description: Status of the pool, 0 = No betting, 1 = Open for betting, 2 = No more betting, pool countdown begins, 3 = Time has expired, no payouts yet, 4 = Payouts complete, 5 = Under review
+                pool_tcreate:
+                  type: string
+                  description: UTC datetime the pool was created
+                pool_tmodified:
+                  type: string
+                  description: UTC datetime the pool was modified
+                pool_tstart:
+                  type: string
+                  description: UTC datetime the pool starts
+                pool_topen:
+                  type: string
+                  description: UTC datetime the pool was open for betting
+                pool_tlock:
+                  type: string
+                  description: UTC datetime the pool was locked from betting
+                pool_texpire:
+                  type: string
+                  description: UTC datetime the pool expired and calculation distribution begins
+                pool_tclose:
+                  type: string
+                  description: UTC datetime the pool results are calculated and distributed and finally closed for archive
+                pool_treview:
+                  type: string
+                  description: UTC datetime the pool went under review for suspicious activity or bugs
+
+                transactions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      transaction_id:
+                        type: integer
+                        description: System ID of the transaction
+                      transaction_amount_buy:
+                        type: number
+                        description: The amount the user committed to the BUY (Crush) action for the pool or the amount the user deposited into the system
+                      transaction_amount_sell:
+                        type: number
+                        description: The amount the user committed to the SELL (Crater) action for the pool
+                      transaction_is_deposit:
+                        type: boolean
+                        description: Whether the transaction was a deposit into the user's account
+                      transaction_wallet_to:
+                        type: string
+                        description: The payee's wallet address, set as null if it is a deposit
+                      transaction_wallet_from:
+                        type: string
+                        description: The payer's wallet address and account to debit from, set to null if its a payout from a pool
+                      transaction_status:
+                        type: integer
+                        description: Status of the transaction, 0 = the transaction is being processed, usually after the close of a pool, 1 = This is a transaction paying someone out from winning, -1 = This is a transaction being debited from someone losing, 2 = A deposit transaction from a user to the system, 3 = Transaction is cancelled
+                      transaction_tcreate:
+                        type: string
+                        description: Datetime the transaction was initiated
+                      transaction_tmodified:
+                        type: string
+                        description: Datetime the transaction was modified
+
+                users:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      user_id:
+                        type: string
+                        description: User's system user ID
+                      user_name:
+                        type: string
+                        description: User's public system name
+                      user_name_display:
+                        type: string
+                        description: User's display name
+                      user_avatar:
+                        type: string
+                        description: User's profile avatar
+                      user_tcreate:
+                        type: string
+                        description: Datetime of when the user registered
+                      user_status:
+                        type: integer
+                        description: System status of the user, 0 = User has no confirmed their email, 1 = User has confirmed their email, 2 = User is validated and completed requisite KYC/AM and can trade, 3 = User is suspended from the system temporarily (likely investigation), 4 = User has been banned from the system
+                      user_tmodified:
+                        type: string
+                        description: Datetime of when the user's account was last updated
+                      user_tlogin:
+                        type: string
+                        description: Datetime of when the user last logged into the system
+
+
+  /pools/{user_id}:
+    get:
+      operationId: pool.read_user_pools
+      tags:
+        - Pool
+      summary: Get all of a user's pools from the system
+      description: Get all of a user's pools from the system
+      parameters:
+        - name: user_id
+          in: path
+          description: User ID of the user
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully fetched the user's pools
+          schema:
+            type: object
+            properties:
+              pools:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    pool_id:
+                      type: integer
+                      description: ID of the pool
+                    pool_hash:
+                      type: string
+                      description: Unique hash public identifier for the pool
+                    pool_pair:
+                      type: string
+                      description: Trading pair of the pool
+                    pool_locked_price:
+                      type: number
+                      description: The locked in price of the pool to beat prior to the pool starting
+                    pool_close_price:
+                      type: number
+                      description: The actual price of the pool at the end
+                    pool_amount_buy:
+                      type: number
+                      description: Total soft currency pooled by users for BUY action (CRUSH)
+                    pool_amount_sell:
+                      type: number
+                      description: Total soft currency pooled by users for SELL action (CRATER)
+                    pool_multiplier_buy:
+                      type: number
+                      description: The multiplier for the buy side
+                    pool_multiplier_sell:
+                      type: number
+                      description: The multiplier for the sell side
+                    pool_fee_type:
+                      type: string
+                      description: The pool fee type, 0 = no fee, 1 = a fixed fee in soft currency, 2 = a percentage of the total pool
+                    pool_fee_amount:
+                      type: number
+                      description: The fee amount taken by the system for services rendered, thankyamuch ;)
+                    pool_status:
+                      type: integer
+                      description: Status of the pool, 0 = No betting, 1 = Open for betting, 2 = No more betting, pool countdown begins, 3 = Time has expired, no payouts yet, 4 = Payouts complete, 5 = Under review
+                    pool_tcreate:
+                      type: string
+                      description: UTC datetime the pool was created
+                    pool_tmodified:
+                      type: string
+                      description: UTC datetime the pool was modified
+                    pool_tstart:
+                      type: string
+                      description: UTC datetime the pool starts
+                    pool_topen:
+                      type: string
+                      description: UTC datetime the pool was open for betting
+                    pool_tlock:
+                      type: string
+                      description: UTC datetime the pool was locked from betting
+                    pool_texpire:
+                      type: string
+                      description: UTC datetime the pool expired and calculation distribution begins
+                    pool_tclose:
+                      type: string
+                      description: UTC datetime the pool results are calculated and distributed and finally closed for archive
+                    pool_treview:
+                      type: string
+                      description: UTC datetime the pool went under review for suspicious activity or bugs
+
+                    transactions:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          transaction_id:
+                            type: integer
+                            description: System ID of the transaction
+                          transaction_amount_buy:
+                            type: number
+                            description: The amount the user committed to the BUY (Crush) action for the pool or the amount the user deposited into the system
+                          transaction_amount_sell:
+                            type: number
+                            description: The amount the user committed to the SELL (Crater) action for the pool
+                          transaction_is_deposit:
+                            type: boolean
+                            description: Whether the transaction was a deposit into the user's account
+                          transaction_wallet_to:
+                            type: string
+                            description: The payee's wallet address, set as null if it is a deposit
+                          transaction_wallet_from:
+                            type: string
+                            description: The payer's wallet address and account to debit from, set to null if its a payout from a pool
+                          transaction_status:
+                            type: integer
+                            description: Status of the transaction, 0 = the transaction is being processed, usually after the close of a pool, 1 = This is a transaction paying someone out from winning, -1 = This is a transaction being debited from someone losing, 2 = A deposit transaction from a user to the system, 3 = Transaction is cancelled
+                          transaction_tcreate:
+                            type: string
+                            description: Datetime the transaction was initiated
+                          transaction_tmodified:
+                            type: string
+                            description: Datetime the transaction was modified
+
+
+  /pool:
+    post:
+      operationId: pool.create
+      tags:
+        - Pool
+      summary: Create a pool in the system
+      description: Create a pool in the system
+      parameters:
+        - name: pool
+          in: body
+          description: Creates a pool in the system
+          required: True
+          schema:
+            type: object
+            properties:
+              pool_hash:
+                type: string
+                description: Unique hash public identifier for the pool
+              pool_pair:
+                type: string
+                description: Trading pair of the pool
+              pool_locked_price:
+                type: number
+                description: The locked in price of the pool to beat prior to the pool starting
+              pool_close_price:
+                type: number
+                description: The actual price of the pool at the end
+              pool_amount_buy:
+                type: number
+                description: Total soft currency pooled by users for BUY action (CRUSH)
+              pool_amount_sell:
+                type: number
+                description: Total soft currency pooled by users for SELL action (CRATER)
+              pool_multiplier_buy:
+                type: number
+                description: The multiplier for the buy side
+              pool_multiplier_sell:
+                type: number
+                description: The multiplier for the sell side
+              pool_fee_type:
+                type: string
+                description: The pool fee type, 0 = no fee, 1 = a fixed fee in soft currency, 2 = a percentage of the total pool
+              pool_fee_amount:
+                type: number
+                description: The fee amount taken by the system for services rendered, thankyamuch ;)
+              pool_status:
+                type: integer
+                description: Status of the pool, 0 = No betting, 1 = Open for betting, 2 = No more betting, pool countdown begins, 3 = Time has expired, no payouts yet, 4 = Payouts complete, 5 = Under review
+              pool_tstart:
+                type: string
+                description: UTC datetime the pool starts
+              pool_topen:
+                type: string
+                description: UTC datetime the pool was open for betting
+              pool_tlock:
+                type: string
+                description: UTC datetime the pool was locked from betting
+              pool_texpire:
+                type: string
+                description: UTC datetime the pool expired and calculation distribution begins
+              pool_tclose:
+                type: string
+                description: UTC datetime the pool results are calculated and distributed and finally closed for archive
+              pool_treview:
+                type: string
+                description: UTC datetime the pool went under review for suspicious activity or bugs
+      responses:
+        201:
+          description: Successfully created Pool
+          schema:
+            properties:
+              pool_id:
+                type: integer
+                description: The pool's system ID
+              pool_hash:
+                type: integer
+                description: THe pool's public hash ID
+
+
+  /pool/{pool_id}:
+    get:
+      operationId: pool.read_one
+      tags:
+        - Pool
+      summary: View a particular pool ID
+      description: View a particular pool ID
+      parameters:
+        - name: pool_id
+          in: path
+          description: Pool ID
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully retrieved pool
+          schema:
+            type: object
+            properties:
+              pool_id:
+                type: integer
+                description: ID of the pool
+              pool_hash:
+                type: string
+                description: Unique hash public identifier for the pool
+              pool_pair:
+                type: string
+                description: Trading pair of the pool
+              pool_locked_price:
+                type: number
+                description: The locked in price of the pool to beat prior to the pool starting
+              pool_close_price:
+                type: number
+                description: The actual price of the pool at the end
+              pool_amount_buy:
+                type: number
+                description: Total soft currency pooled by users for BUY action (CRUSH)
+              pool_amount_sell:
+                type: number
+                description: Total soft currency pooled by users for SELL action (CRATER)
+              pool_multiplier_buy:
+                type: number
+                description: The multiplier for the buy side
+              pool_multiplier_sell:
+                type: number
+                description: The multiplier for the sell side
+              pool_fee_type:
+                type: string
+                description: The pool fee type, 0 = no fee, 1 = a fixed fee in soft currency, 2 = a percentage of the total pool
+              pool_fee_amount:
+                type: number
+                description: The fee amount taken by the system for services rendered, thankyamuch ;)
+              pool_status:
+                type: integer
+                description: Status of the pool, 0 = No betting, 1 = Open for betting, 2 = No more betting, pool countdown begins, 3 = Time has expired, no payouts yet, 4 = Payouts complete, 5 = Under review
+              pool_tcreate:
+                type: string
+                description: UTC datetime the pool was created
+              pool_tmodified:
+                type: string
+                description: UTC datetime the pool was modified
+              pool_tstart:
+                type: string
+                description: UTC datetime the pool starts
+              pool_topen:
+                type: string
+                description: UTC datetime the pool was open for betting
+              pool_tlock:
+                type: string
+                description: UTC datetime the pool was locked from betting
+              pool_texpire:
+                type: string
+                description: UTC datetime the pool expired and calculation distribution begins
+              pool_tclose:
+                type: string
+                description: UTC datetime the pool results are calculated and distributed and finally closed for archive
+              pool_treview:
+                type: string
+                description: UTC datetime the pool went under review for suspicious activity or bugs
+
+              transactions:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    transaction_id:
+                      type: integer
+                      description: System ID of the transaction
+                    transaction_amount_buy:
+                      type: number
+                      description: The amount the user committed to the BUY (Crush) action for the pool or the amount the user deposited into the system
+                    transaction_amount_sell:
+                      type: number
+                      description: The amount the user committed to the SELL (Crater) action for the pool
+                    transaction_is_deposit:
+                      type: boolean
+                      description: Whether the transaction was a deposit into the user's account
+                    transaction_wallet_to:
+                      type: string
+                      description: The payee's wallet address, set as null if it is a deposit
+                    transaction_wallet_from:
+                      type: string
+                      description: The payer's wallet address and account to debit from, set to null if its a payout from a pool
+                    transaction_status:
+                      type: integer
+                      description: Status of the transaction, 0 = the transaction is being processed, usually after the close of a pool, 1 = This is a transaction paying someone out from winning, -1 = This is a transaction being debited from someone losing, 2 = A deposit transaction from a user to the system, 3 = Transaction is cancelled
+                    transaction_tcreate:
+                      type: string
+                      description: Datetime the transaction was initiated
+                    transaction_tmodified:
+                      type: string
+                      description: Datetime the transaction was modified
+              users:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    user_id:
+                      type: string
+                      description: User's system user ID
+                    user_name:
+                      type: string
+                      description: User's public system name
+                    user_name_display:
+                      type: string
+                      description: User's display name
+                    user_avatar:
+                      type: string
+                      description: User's profile avatar
+                    user_tcreate:
+                      type: string
+                      description: Datetime of when the user registered
+                    user_status:
+                      type: integer
+                      description: System status of the user, 0 = User has no confirmed their email, 1 = User has confirmed their email, 2 = User is validated and completed requisite KYC/AM and can trade, 3 = User is suspended from the system temporarily (likely investigation), 4 = User has been banned from the system
+                    user_tmodified:
+                      type: string
+                      description: Datetime of when the user's account was last updated
+                    user_tlogin:
+                      type: string
+                      description: Datetime of when the user last logged into the system
+
+
+    put:
+      operationId: pool.update
+      tags:
+        - Pool
+      summary: Update a pool with a specific pool ID
+      description: Update a pool with a specific pool ID
+      parameters:
+        - name: pool_id
+          in: path
+          description: Pool ID to delete
+          type: integer
+          required: true
+        - name: pool
+          in: body
+          schema:
+            type: object
+            properties:
+              pool_locked_price:
+                type: number
+                description: The locked in price of the pool to beat prior to the pool starting
+              pool_close_price:
+                type: number
+                description: The actual price of the pool at the end
+              pool_amount_buy:
+                type: number
+                description: Total soft currency pooled by users for BUY action (CRUSH)
+              pool_amount_sell:
+                type: number
+                description: Total soft currency pooled by users for SELL action (CRATER)
+              pool_multiplier_buy:
+                type: number
+                description: The multiplier for the buy side
+              pool_multiplier_sell:
+                type: number
+                description: The multiplier for the sell side
+              pool_fee_type:
+                type: string
+                description: The pool fee type, 0 = no fee, 1 = a fixed fee in soft currency, 2 = a percentage of the total pool
+              pool_fee_amount:
+                type: number
+                description: The fee amount taken by the system for services rendered, thankyamuch ;)
+              pool_status:
+                type: integer
+                description: Status of the pool, 0 = No betting, 1 = Open for betting, 2 = No more betting, pool countdown begins, 3 = Time has expired, no payouts yet, 4 = Payouts complete, 5 = Under review
+              pool_tstart:
+                type: string
+                description: UTC datetime the pool starts
+              pool_topen:
+                type: string
+                description: UTC datetime the pool was open for betting
+              pool_tlock:
+                type: string
+                description: UTC datetime the pool was locked from betting
+              pool_texpire:
+                type: string
+                description: UTC datetime the pool expired and calculation distribution begins
+              pool_tclose:
+                type: string
+                description: UTC datetime the pool results are calculated and distributed and finally closed for archive
+              pool_treview:
+                type: string
+                description: UTC datetime the pool went under review for suspicious activity or bugs
+
+      responses:
+        200:
+          description: Successfully updated pool
+          schema:
+            properties:
+              pool_id:
+                type: integer
+                description: Pool's ID
+
+    delete:
+      operationId: pool.delete
+      tags:
+        - Pool
+      summary: Delete a pool
+      description: Delete a pool
+      parameters:
+        - name: pool_id
+          in: path
+          description: Pool ID to delete
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully deleted a pool
+
+
