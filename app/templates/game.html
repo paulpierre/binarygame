@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Trade binary with your bros">
+  <meta name="description" content="Trade binary crypto with your bros">
   <meta name="author" content="Secret team">
-  <title>Binary Game - Gamble with Yeet!Coin, be a bro!</title>
+  <title>Marginbox - Gamble with Margin Coin, be a bro!</title>
   <!-- Favicon -->
   <link href="/static/assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -18,412 +18,849 @@
   <link type="text/css" href="/static/assets/css/argon.css?v=1.1.0" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fingerprintjs/0.5.3/fingerprint.min.js"></script>
+
+
+
+
 </head>
 
 <body>
-  <header class="header-global">
-    <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom">
-      <div class="container">
-        <a class="navbar-brand mr-lg-5" href="./index.html"><img src="/static/assets/img/brand/white.png"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse" id="navbar_global">
-          <div class="navbar-collapse-header">
-            <div class="row">
-              <div class="col-6 collapse-brand">
-                <a href="./index.html">
-                  <img src="/static/assets/img/brand/blue.png">
+<header class="header-global">
+  <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom">
+    <div class="container">
+      <a class="navbar-brand mr-lg-5" href="./index.html"><img src="/static/assets/img/brand/white.png"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse" id="navbar_global">
+        <div class="navbar-collapse-header">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a href="./index.html">
+                <img src="/static/assets/img/brand/blue.png">
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link" data-toggle="dropdown" role="button">
+              <i class="ni ni-ui-04 d-lg-none"></i>
+              <span class="nav-link-inner--text">How to Play</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-xl">
+              <div class="dropdown-menu-inner">
+                <a href="#" class="media d-flex align-items-center">
+                  <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
+                    <i class="ni ni-spaceship"></i>
+                  </div>
+                  <div class="media-body ml-3">
+                    <h6 class="heading text-primary mb-md-1">Depositing money</h6>
+                    <p class="description d-none d-md-inline-block mb-0">Learn how create an account and deposit your ETH to get Margin Coin</p>
+                  </div>
+                </a>
+                <a href="#" class="media d-flex align-items-center">
+                  <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
+                    <i class="ni ni-palette"></i>
+                  </div>
+                  <div class="media-body ml-3">
+                    <h6 class="heading text-primary mb-md-1">How to Trade</h6>
+                    <p class="description d-none d-md-inline-block mb-0">Learn how to trade in 3 minutes, its easy to to get started.</p>
+                  </div>
+                </a>
+                <a href="#" class="media d-flex align-items-center">
+                  <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
+                    <i class="ni ni-ui-04"></i>
+                  </div>
+                  <div class="media-body ml-3">
+                    <h5 class="heading text-warning mb-md-1">Strategies</h5>
+                    <p class="description d-none d-md-inline-block mb-0">Our expert team shares best practices and tips on how to successfully trade</p>
+                  </div>
                 </a>
               </div>
-              <div class="col-6 collapse-close">
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
-                  <span></span>
-                  <span></span>
-                </button>
-              </div>
             </div>
-          </div>
-          <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-            <li class="nav-item dropdown">
-              <a href="#" class="nav-link" data-toggle="dropdown" role="button">
-                <i class="ni ni-ui-04 d-lg-none"></i>
-                <span class="nav-link-inner--text">How to Play</span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-xl">
-                <div class="dropdown-menu-inner">
-                  <a href="#" class="media d-flex align-items-center">
-                    <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
-                      <i class="ni ni-spaceship"></i>
-                    </div>
-                    <div class="media-body ml-3">
-                      <h6 class="heading text-primary mb-md-1">Depositing money</h6>
-                      <p class="description d-none d-md-inline-block mb-0">Learn how create an account and deposit your ETH to get Yeet!Coin</p>
-                    </div>
-                  </a>
-                  <a href="#" class="media d-flex align-items-center">
-                    <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
-                      <i class="ni ni-palette"></i>
-                    </div>
-                    <div class="media-body ml-3">
-                      <h6 class="heading text-primary mb-md-1">How to Trade</h6>
-                      <p class="description d-none d-md-inline-block mb-0">Learn how to trade in 3 minutes, its easy to to get started.</p>
-                    </div>
-                  </a>
-                  <a href="#" class="media d-flex align-items-center">
-                    <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
-                      <i class="ni ni-ui-04"></i>
-                    </div>
-                    <div class="media-body ml-3">
-                      <h5 class="heading text-warning mb-md-1">Strategies</h5>
-                      <p class="description d-none d-md-inline-block mb-0">Our expert team shares best practices and tips on how to successfully trade</p>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a href="#" class="nav-link" data-toggle="dropdown" role="button">
-                <i class="ni ni-collection d-lg-none"></i>
-                <span class="nav-link-inner--text">Help</span>
-              </a>
-              <div class="dropdown-menu">
-                <a href="#" class="dropdown-item">About Us</a>
-                <a href="#" class="dropdown-item">FAQ</a>
-                <a href="#" class="dropdown-item">Contact Us</a>
-                <a href="#" class="dropdown-item">Privacy Policy</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link" data-toggle="dropdown" role="button">
+              <i class="ni ni-collection d-lg-none"></i>
+              <span class="nav-link-inner--text">Help</span>
+            </a>
+            <div class="dropdown-menu">
+              <a href="#" class="dropdown-item">About Us</a>
+              <a href="#" class="dropdown-item">FAQ</a>
+              <a href="#" class="dropdown-item">Contact Us</a>
+              <a href="#" class="dropdown-item">Privacy Policy</a>
 
-              </div>
-            </li>
-          </ul>
-          <ul class="navbar-nav align-items-lg-center ml-lg-auto">
-            <li class="nav-item">
-              <a class="nav-link nav-link-icon" href="#" target="_blank" data-toggle="tooltip" title="Like us on Facebook">
-                <i class="fa fa-facebook-square"></i>
-                <span class="nav-link-inner--text d-lg-none">Facebook</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link nav-link-icon" href="#" target="_blank" data-toggle="tooltip" title="Follow us on Instagram">
-                <i class="fa fa-instagram"></i>
-                <span class="nav-link-inner--text d-lg-none">Instagram</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link nav-link-icon" href="#" target="_blank" data-toggle="tooltip" title="Follow us on Twitter">
-                <i class="fa fa-twitter-square"></i>
-                <span class="nav-link-inner--text d-lg-none">Twitter</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link nav-link-icon" href="#" target="_blank" data-toggle="tooltip" title="Star us on Github">
-                <i class="fa fa-github"></i>
-                <span class="nav-link-inner--text d-lg-none">Github</span>
-              </a>
-            </li>
-            <li class="nav-item d-none d-lg-block ml-lg-4">
-              <a href="#" target="_blank" class="btn btn-neutral btn-icon">
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="#" target="_blank" data-toggle="tooltip" title="Like us on Facebook">
+              <i class="fa fa-facebook-square"></i>
+              <span class="nav-link-inner--text d-lg-none">Facebook</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="#" target="_blank" data-toggle="tooltip" title="Follow us on Instagram">
+              <i class="fa fa-instagram"></i>
+              <span class="nav-link-inner--text d-lg-none">Instagram</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="#" target="_blank" data-toggle="tooltip" title="Follow us on Twitter">
+              <i class="fa fa-twitter-square"></i>
+              <span class="nav-link-inner--text d-lg-none">Twitter</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="#" target="_blank" data-toggle="tooltip" title="Star us on Github">
+              <i class="fa fa-github"></i>
+              <span class="nav-link-inner--text d-lg-none">Github</span>
+            </a>
+          </li>
+          <li class="nav-item d-none d-lg-block ml-lg-4">
+            <a href="#" target="_blank" class="btn btn-neutral btn-icon">
                 <span class="btn-inner--icon">
-                  <i class="fa fa-money mr-2"></i>
+                  <img src="/static/assets/img/brand/margin_token.png" class="coin-icon-md">
                 </span>
-                <span class="nav-link-inner--text">Buy Yeet!Coin</span>
-              </a>
-               | <a href="/logout" class="text-white-50">Sign out {{ user.user_name}}</a>
-            </li>
-          </ul>
+              <span class="nav-link-inner--text">Buy Margin Coin</span>
+            </a>
+            | <a href="/logout" class="text-white-50">Sign out {{ user.user_name}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<main>
+
+  <div class="position-relative">
+    <!-- Hero for FREE version -->
+    <section class="section section-lg section-hero section-shaped" id="ticker">
+      <!-- Background circles -->
+      <div class="shape shape-style-1 shape-primary">
+        <span class="span-150"></span>
+        <span class="span-50"></span>
+        <span class="span-50"></span>
+        <span class="span-75"></span>
+        <span class="span-100"></span>
+        <span class="span-75"></span>
+        <span class="span-50"></span>
+        <span class="span-100"></span>
+        <span class="span-50"></span>
+        <span class="span-100"></span>
+      </div>
+      <div class="container shape-container d-flex align-items-center">
+        <div class="col px-0">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-lg-3 text-center shadow-lg">
+              <h6 class="text-white">BTC Last Price</h6>
+              <h3 class="text-white" style="font-weight:600">$<span id="btc-price"></span></h3>
+            </div>
+
+            <div class="col-lg-6 text-center">
+              <img src="/static/assets/img/brand/crush_crater.png" style="width: 200px;" class="img-fluid">
+              <!--<p class="lead text-white">A fast-paced gambling portal for crypto degenerates like you. Stronger than fentanyl.</p>-->
+              <!--
+              <div class="btn-wrapper mt-5">
+                <a href="#" class="btn btn-lg btn-white btn-icon mb-3 mb-sm-0">
+                  <span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
+                  <span class="btn-inner--text">Sign up and get 300 Dildos</span>
+                </a>
+                <a href="#" class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank">
+                  <span class="btn-inner--icon"><i class="fa fa-github"></i></span>
+                  <span class="btn-inner--text"><span class="text-warning">Star us</span> on Github</span>
+                </a>
+              </div>
+            -->
+
+            </div>
+            <div class="col-lg-3 text-center  shadow-lg ticker-right">
+              <h6 class="text-white">Time Left</h6>
+              <h3 class="text-white" style="font-weight:800"><span class="time-ticker">0</span></h3>
+            </div>
+
+          </div>
         </div>
       </div>
-    </nav>
-  </header>
-  <main>
-
-    <div class="position-relative">
-      <!-- Hero for FREE version -->
-      <section class="section section-lg section-hero section-shaped" id="ticker">
-        <!-- Background circles -->
-        <div class="shape shape-style-1 shape-primary">
-          <span class="span-150"></span>
-          <span class="span-50"></span>
-          <span class="span-50"></span>
-          <span class="span-75"></span>
-          <span class="span-100"></span>
-          <span class="span-75"></span>
-          <span class="span-50"></span>
-          <span class="span-100"></span>
-          <span class="span-50"></span>
-          <span class="span-100"></span>
-        </div>
-        <div class="container shape-container d-flex align-items-center">
-          <div class="col px-0">
-            <div class="row align-items-center justify-content-center">
-              <div class="col-lg-3 text-center shadow-lg">
-                <h6 class="text-white">BTC Last Price</h6>
-                <h3 class="text-white" style="font-weight:600">$<span id="btc-price"></span></h3>
-              </div>
-
-              <div class="col-lg-6 text-center">
-                <img src="/static/assets/img/brand/white.png" style="width: 200px;" class="img-fluid">
-                <p class="lead text-white">A fast-paced gambling portal for crypto degenerates like you. Stronger than fentanyl.</p>
-                <!--
-                <div class="btn-wrapper mt-5">
-                  <a href="#" class="btn btn-lg btn-white btn-icon mb-3 mb-sm-0">
-                    <span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
-                    <span class="btn-inner--text">Sign up and get 300 Dildos</span>
-                  </a>
-                  <a href="#" class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank">
-                    <span class="btn-inner--icon"><i class="fa fa-github"></i></span>
-                    <span class="btn-inner--text"><span class="text-warning">Star us</span> on Github</span>
-                  </a>
-                </div>
-              -->
-                
-              </div>
-              <div class="col-lg-3 text-center  shadow-lg">
-                <h1 class="text-white" style="font-weight:800" id="time_ticker">{{ time_ticker }}</h1>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <!-- SVG separator -->
-        <div class="separator separator-bottom separator-skew zindex-100">
-          <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-            <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
-          </svg>
-        </div>
-      </section>
-    </div>
-
-    <section class="section section-components pb-0 has-cards" id="section-components">
-      <div class="container position-relative row" style="bottom:250px;z-index:1;margin:0 auto;">
-
-        <div class="col-lg-4 mb-lg-auto">            
-            <div class="card align-items-center shadow-lg rounded card-lift--hover" style="width:300px;background-color:#7b539e;">
-              <h2 class="mb-5">
-                <span class="text-white">BTC/USD</span>
-              </h2>
-              <button class="btn btn-icon btn-3 btn-success" type="button">
-                <span class="btn-inner--icon"><i class="ni ni-bold-up"></i></span>
-                  <span class="btn-inner--text">Enter MEWN</span>
-              </button>
-
-              <button class="btn btn-icon btn-3 btn-danger" type="button">
-                <span class="btn-inner--icon"><i class="ni ni-bold-down"></i></span>
-
-                  <span class="btn-inner--text">Enter ReKKt</span>
-              </button>
-            </div>
-        </div>
-
-        <div class="col-lg-4 mb-lg-auto ">
-            <div class="card align-items-center shadow-lg rounded active-card" style="width:300px;background-color:#7b539e;">
-              <h2 class="mb-5">
-                <span class="text-white">BTC/USD</span>
-              </h2>
-              <button class="btn btn-icon btn-3 btn-success" type="button">
-                <span class="btn-inner--icon"><i class="ni ni-bold-up"></i></span>
-                  <span class="btn-inner--text">Enter MEWN</span>
-              </button>
-
-              <button class="btn btn-icon btn-3 btn-danger" type="button">
-                <span class="btn-inner--icon"><i class="ni ni-bold-down"></i></span>
-
-                  <span class="btn-inner--text">Enter ReKKt</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mb-lg-auto">
-            <div class="card align-items-center shadow-lg rounded card-lift--hover" style="width:300px;background-color:#7b539e;">
-              <h2 class="mb-5">
-                <span class="text-white">BTC/USD</span>
-              </h2>
-              <button class="btn btn-icon btn-3 btn-success" type="button">
-                <span class="btn-inner--icon"><i class="ni ni-bold-up"></i></span>
-                  <span class="btn-inner--text">Enter MEWN</span>
-              </button>
-
-              <button class="btn btn-icon btn-3 btn-danger" type="button">
-                <span class="btn-inner--icon"><i class="ni ni-bold-down"></i></span>
-
-                  <span class="btn-inner--text">Enter ReKKt</span>
-              </button>
-            </div>
-          </div>
-
-  
-
-
+      <!-- SVG separator -->
+      <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
       </div>
     </section>
-    <section>
-      <div class="container align-items-center">
+  </div>
+
+  <section class="section section-components pb-0 has-cards" id="section-components">
+    <div class="position-relative row content-center">
+
+      <div class="card-slider">
+
+        <!-- START CARD -->
+        <div class="card align-items-center shadow-lg rounded active-card">
+          <div class="card-info active">
+            <span class="pair">BTC/USD </span>
+            <span class="pool-id">8382AF</span>
+            <span class="status">LIVE</span>
+          </div>
+          <div class="pool-header active">
+            <span class="pool-info">
+              POOL <img src="/static/assets/img/brand/margin_token.png" class="coin-icon"> 5,3303
+            </span>
+            <span class="time-ticker pool-timer">
+              00:00:00
+            </span>
+          </div>
+
+          <div class="btn btn-icon btn-3 crush-stats">
+
+            <div class="payout-multiplier">
+
+              <img src="/static/assets/img/brand/img_crush.png" class="img-crush">
+              <span class="btn-inner--icon crush-arrow"><i class="ni ni-bold-right"></i></span>
+              <span>Payout: 1.393x</span>
+
+              <div class="payout-value">
+                <img src="/static/assets/img/brand/margin_token.png" class="coin-icon"> 3,139.79
+              </div>
+            </div>
+          </div>
+
+          <div class="action-container">
+            <div class="locked-price">
+              Locked Price $<strong>10,258.71</strong>
+            </div>
+            <div class="status-price">
+              CRUSH BY $<strong>29.50</strong>
+            </div>
+            <div class="last-price">
+              Last Price $<strong>10,286.28</strong>
+            </div>
+          </div>
+
+          <div class="btn btn-icon btn-3 crater-stats">
+            <div class="payout-value">
+              <img src="/static/assets/img/brand/margin_token.png" class="coin-icon"> 1,049.33
+            </div>
+            <div class="payout-multiplier">
+              <img src="/static/assets/img/brand/img_crater.png" class="img-crater">
+              <span class="btn-inner--icon crater-arrow"><i class="ni ni-bold-right"></i></span> Payout: 1.393x
+            </div>
+          </div>
+        </div>
+        <!-- END CARD -->
+            <!-- START CARD -->
+        <div class="card align-items-center shadow-lg rounded card-lift--hover inactive-card">
+          <div class="card-info active">
+            <span class="pair">BTC/USD </span>
+            <span class="pool-id">8382AF</span>
+            <span class="status">LIVE</span>
+          </div>
+          <div class="pool-header active">
+            <span class="pool-info">
+              POOL <img src="/static/assets/img/brand/margin_token.png" class="coin-icon"> 5,3303
+            </span>
+            <span class="time-ticker pool-timer">
+              00:00:00
+            </span>
+          </div>
+
+          <button class="btn btn-icon btn-3 btn-success" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-bold-up"></i></span>
+            <span class="btn-inner--text">Enter CRUSH</span>
+          </button>
+
+          <button class="btn btn-icon btn-3 btn-danger" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-bold-down"></i></span>
+
+            <span class="btn-inner--text">Enter CRATER</span>
+          </button>
+        </div>
+        <!-- END CARD -->
+                <!-- START CARD -->
+        <div class="card align-items-center shadow-lg rounded card-lift--hover inactive-card">
+          <div class="card-info active">
+            <span class="pair">BTC/USD </span>
+            <span class="pool-id">8382AF</span>
+            <span class="status">LIVE</span>
+          </div>
+          <div class="pool-header active">
+            <span class="pool-info">
+              POOL <img src="/static/assets/img/brand/margin_token.png" class="coin-icon"> 5,3303
+            </span>
+            <span class="time-ticker pool-timer">
+              00:00:00
+            </span>
+          </div>
+
+          <button class="btn btn-icon btn-3 btn-success" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-bold-up"></i></span>
+            <span class="btn-inner--text">Enter CRUSH</span>
+          </button>
+
+          <button class="btn btn-icon btn-3 btn-danger" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-bold-down"></i></span>
+
+            <span class="btn-inner--text">Enter CRATER</span>
+          </button>
+        </div>
+        <!-- END CARD -->
+                <!-- START CARD -->
+        <div class="card align-items-center shadow-lg rounded card-lift--hover inactive-card">
+          <div class="card-info active">
+            <span class="pair">BTC/USD </span>
+            <span class="pool-id">8382AF</span>
+            <span class="status">LIVE</span>
+          </div>
+          <div class="pool-header active">
+            <span class="pool-info">
+              POOL <img src="/static/assets/img/brand/margin_token.png" class="coin-icon"> 5,3303
+            </span>
+            <span class="time-ticker pool-timer">
+              00:00:00
+            </span>
+          </div>
+
+          <button class="btn btn-icon btn-3 btn-success" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-bold-up"></i></span>
+            <span class="btn-inner--text">Enter CRUSH</span>
+          </button>
+
+          <button class="btn btn-icon btn-3 btn-danger" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-bold-down"></i></span>
+
+            <span class="btn-inner--text">Enter CRATER</span>
+          </button>
+        </div>
+        <!-- END CARD -->
+                <!-- START CARD -->
+        <div class="card align-items-center shadow-lg rounded card-lift--hover inactive-card">
+          <div class="card-info active">
+            <span class="pair">BTC/USD </span>
+            <span class="pool-id">8382AF</span>
+            <span class="status">LIVE</span>
+          </div>
+          <div class="pool-header active">
+            <span class="pool-info">
+              POOL <img src="/static/assets/img/brand/margin_token.png" class="coin-icon"> 5,3303
+            </span>
+            <span class="time-ticker pool-timer">
+              00:00:00
+            </span>
+          </div>
+
+          <button class="btn btn-icon btn-3 btn-success" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-bold-up"></i></span>
+            <span class="btn-inner--text">Enter CRUSH</span>
+          </button>
+
+          <button class="btn btn-icon btn-3 btn-danger" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-bold-down"></i></span>
+
+            <span class="btn-inner--text">Enter CRATER</span>
+          </button>
+        </div>
+        <!-- END CARD -->
+        <!-- START CARD -->
+        <div class="card align-items-center shadow-lg rounded card-lift--hover inactive-card">
+          <div class="card-info active">
+            <span class="pair">BTC/USD </span>
+            <span class="pool-id">8382AF</span>
+            <span class="status">LIVE</span>
+          </div>
+          <div class="pool-header active">
+            <span class="pool-info">
+              POOL <img src="/static/assets/img/brand/margin_token.png" class="coin-icon"> 5,3303
+            </span>
+            <span class="time-ticker pool-timer">
+              00:00:00
+            </span>
+          </div>
+
+          <button class="btn btn-icon btn-3 btn-success" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-bold-up"></i></span>
+            <span class="btn-inner--text">Enter CRUSH</span>
+          </button>
+
+          <button class="btn btn-icon btn-3 btn-danger" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-bold-down"></i></span>
+
+            <span class="btn-inner--text">Enter CRATER</span>
+          </button>
+        </div>
+        <!-- END CARD -->
+        <!-- START CARD -->
+        <div class="card align-items-center shadow-lg rounded card-lift--hover complete-card">
+          <div class="card-info active">
+            <span class="pair">BTC/USD </span>
+            <span class="pool-id">8382AF</span>
+            <span class="status">COMPLETE</span>
+          </div>
+          <div class="pool-header active">
+            <span class="pool-info">
+              POOL <img src="/static/assets/img/brand/margin_token.png" class="coin-icon"> 5,3303
+            </span>
+            <span class="time-ticker pool-timer">
+              00:00:00
+            </span>
+          </div>
+
+          <button class="btn btn-icon btn-3 btn-success" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-bold-up"></i></span>
+            <span class="btn-inner--text">Enter CRUSH</span>
+          </button>
+
+          <button class="btn btn-icon btn-3 btn-danger" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-bold-down"></i></span>
+
+            <span class="btn-inner--text">Enter CRATER</span>
+          </button>
+        </div>
+        <!-- END CARD -->
+
+
+        <!-- START CARD -->
+        <div class="card align-items-center shadow-lg rounded card-lift--hover complete-card">
+          <div class="card-info active">
+            <span class="pair">BTC/USD </span>
+            <span class="pool-id">8382AF</span>
+            <span class="status">COMPLETE</span>
+          </div>
+          <div class="pool-header active">
+            <span class="pool-info">
+              POOL <img src="/static/assets/img/brand/margin_token.png" class="coin-icon"> 5,3303
+            </span>
+            <span class="time-ticker pool-timer">
+              00:00:00
+            </span>
+          </div>
+
+          <button class="btn btn-icon btn-3 btn-success" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-bold-up"></i></span>
+            <span class="btn-inner--text">Enter CRUSH</span>
+          </button>
+
+          <button class="btn btn-icon btn-3 btn-danger" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-bold-down"></i></span>
+
+            <span class="btn-inner--text">Enter CRATER</span>
+          </button>
+        </div>
+        <!-- END CARD -->
+        <!-- START CARD -->
+        <div class="card align-items-center shadow-lg rounded card-lift--hover complete-card">
+          <div class="card-info active">
+            <span class="pair">BTC/USD </span>
+            <span class="pool-id">8382AF</span>
+            <span class="status">COMPLETE</span>
+          </div>
+          <div class="pool-header active">
+            <span class="pool-info">
+              POOL <img src="/static/assets/img/brand/margin_token.png" class="coin-icon"> 5,3303
+            </span>
+            <span class="time-ticker pool-timer">
+              00:00:00
+            </span>
+          </div>
+
+          <button class="btn btn-icon btn-3 btn-success" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-bold-up"></i></span>
+            <span class="btn-inner--text">Enter CRUSH</span>
+          </button>
+
+          <button class="btn btn-icon btn-3 btn-danger" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-bold-down"></i></span>
+
+            <span class="btn-inner--text">Enter CRATER</span>
+          </button>
+        </div>
+        <!-- END CARD -->
+                <!-- START CARD -->
+        <div class="card align-items-center shadow-lg rounded card-lift--hover complete-card">
+          <div class="card-info active">
+            <span class="pair">BTC/USD </span>
+            <span class="pool-id">8382AF</span>
+            <span class="status">COMPLETE</span>
+          </div>
+          <div class="pool-header active">
+            <span class="pool-info">
+              POOL <img src="/static/assets/img/brand/margin_token.png" class="coin-icon"> 5,3303
+            </span>
+            <span class="time-ticker pool-timer">
+              00:00:00
+            </span>
+          </div>
+
+          <button class="btn btn-icon btn-3 btn-success" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-bold-up"></i></span>
+            <span class="btn-inner--text">Enter CRUSH</span>
+          </button>
+
+          <button class="btn btn-icon btn-3 btn-danger" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-bold-down"></i></span>
+
+            <span class="btn-inner--text">Enter CRATER</span>
+          </button>
+        </div>
+        <!-- END CARD -->
+      </div>
+
+
+
+
+
+
+    </div>
+  </section>
+  <section>
+    <div class="container align-items-center">
       <!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
-  <div id="tradingview_60f1b"></div>
-  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BITSTAMP-BTCUSD/" rel="noopener" target="_blank"><span class="blue-text">BTCUSD Chart</span></a> by TradingView</div>
-  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-  <script type="text/javascript">
-  new TradingView.widget(
-  {
-  "width": 900,
-  "height": 500,
-  "symbol": "BITSTAMP:BTCUSD",
-  "interval": "1",
-  "timezone": "Etc/UTC",
-  "theme": "Light",
-  "style": "1",
-  "locale": "en",
-  "toolbar_bg": "#f1f3f6",
-  "enable_publishing": false,
-  "save_image": false,
-  "calendar": true,
-  "container_id": "tradingview_60f1b"
-}
-  );
-  </script>
-</div>
-<!-- TradingView Widget END -->
+      <div class="tradingview-widget-container">
+        <div id="tradingview_60f1b"></div>
+        <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BITSTAMP-BTCUSD/" rel="noopener" target="_blank"><span class="blue-text">BTCUSD Chart</span></a> by TradingView</div>
+        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+        <script type="text/javascript">
+          new TradingView.widget(
+                  {
+                    "width": 900,
+                    "height": 500,
+                    "symbol": "BITSTAMP:BTCUSD",
+                    "interval": "1",
+                    "timezone": "Etc/UTC",
+                    "theme": "Light",
+                    "style": "1",
+                    "locale": "en",
+                    "toolbar_bg": "#f1f3f6",
+                    "enable_publishing": false,
+                    "save_image": false,
+                    "calendar": true,
+                    "container_id": "tradingview_60f1b"
+                  }
+          );
+        </script>
       </div>
+      <!-- TradingView Widget END -->
+    </div>
 
-    </section>
-    
-  </main>
-  <footer class="footer has-cards">
-  
-    <div class="container">
-     
-      <hr>
-      <div class="row align-items-center justify-content-md-between">
-        <div class="col-md-6">
-          <div class="copyright">
-            &copy; 2019 <a href="#" target="_blank">Binary Game Inc. / Yeet!Coin</a>.
-          </div>
+  </section>
+
+</main>
+<footer class="footer has-cards">
+
+  <div class="container">
+
+    <hr>
+    <div class="row align-items-center justify-content-md-between">
+      <div class="col-md-6">
+        <div class="copyright">
+          &copy; 2019 <a href="#" target="_blank">MarginBox Inc. / MarginCoin</a>.
         </div>
-        <div class="col-md-6">
-          <ul class="nav nav-footer justify-content-end">
-            <li class="nav-item">
-              <a href="#" class="nav-link" target="_blank">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link" target="_blank">Privacy Policy</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link" target="_blank">Terms of Service</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link" target="_blank">Support</a>
-            </li>
-          </ul>
-        </div>
+      </div>
+      <div class="col-md-6">
+        <ul class="nav nav-footer justify-content-end">
+          <li class="nav-item">
+            <a href="#" class="nav-link" target="_blank">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" target="_blank">Privacy Policy</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" target="_blank">Terms of Service</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" target="_blank">Support</a>
+          </li>
+        </ul>
       </div>
     </div>
-  </footer>
-
-  <script>
-
+  </div>
+</footer>
 
 
-      var app = new Vue({
-      el: '#ticker',
-      data: {
-        time_ticker: '05:00:00',
-        end_time: Date.parse(new Date()) + 60 * 5 * 1000,
-        remaining_time:null,
-        time_interval:null,
-        btc_price:null,
-        user_fingerprint:null,
+<style>
+  .slick-list {
+    overflow:visible !important;
+  }
+  .card-slider {
+    width:100%;
+   bottom:270px;
+    position:relative;
+    z-index:999999 !important;
+  }
+  .card-slider div.card {
+    max-width:300px;
+    margin-left:50px;
+    -webkit-box-shadow: -1px 10px 31px 0px rgba(0,0,0,0.5) !important;
+    -moz-box-shadow: -1px 10px 31px 0px rgba(0,0,0,0.5) !important;
+    box-shadow: -1px 10px 31px 0px rgba(0,0,0,0.5) !important;
+    z-index:999999 !important;
+    overflow:visible !important;
+  }
 
-      },
-      computed: {
-        get_remaining_time: function()
+  .card-slider div.card  {
+    text-align:center;
+
+  }
+  .active-card {
+    border:5px solid #2b2b58;
+    background-color:#7b539e;
+    min-width:360px;
+    position:relative;
+    bottom:50px;
+  }
+  .inactive-card {
+    border:5px solid #2b2b58;
+    background-color:#7b539e;
+  }
+
+  .complete-card {
+    border:5px solid #555;
+    background-color:#555;
+    opacity:0.8;
+  }
+
+
+  .card-info {
+    background-color:#2b2b58;
+    width:100%;
+    padding:10px;
+    color:#fff;
+  }
+  .card-info span.pair {
+    font-weight:800;
+    float:left;
+    color:#fff;
+    margin-right:10px;
+  }
+  .card-info span.pool-id {
+    width:100%;
+    color:#fff;
+  }
+  .card-info span.status {
+    float:right;
+    color:#fff;
+  }
+  .pool-header {
+    width:100%;
+    background-color:#3c4d69;
+    padding:10px;
+    color:#fff;
+    float:left;
+  }
+
+  .pool-header span.pool-info
+  {
+    float:left;
+    width:50%;
+  }
+
+  .pool-header img {
+    display:inline-block !important;
+    max-width:50px;
+  }
+  .pool-header span  {
+    display:inline-block;
+  }
+
+  .pool-header span.pool-timer {
+    font-weight:800;
+    float:right;
+  }
+  .coin-icon {
+    width:25px;
+  }
+
+  .coin-icon-md {
+    width:40px !important;
+  }
+  .crush-arrow {
+    color:#fff;
+  }
+  .crush-stats {
+    background-color:#00c782;
+    width:80%;
+  }
+  .crush-stats .payout-value {
+    color:#fff;
+    background-color:#037a51;
+    padding:5px;
+    border-radius:50px;
+    margin-top:10px;
+  }
+
+  .crush-stats .payout-value img {
+    display:inline-block !important;
+  }
+  .img-crush {
+    width:70px;
+    margin:10px 10px 10px 0;
+    display:inline-block !important;
+  }
+  .payout-multiplier {
+    color:#fff;
+  }
+  .crater-stats .payout-multiplier {
+    margin-top:10px;
+  }
+
+  .crater-arrow {
+    color:#fff;
+  }
+  .crater-stats {
+    margin-top:15px !important;
+    background-color:#fa3151;
+    width:80%;
+  }
+  .crater-stats .payout-value {
+    color:#fff;
+    background-color:#9b1d31;
+    padding:5px;
+    border-radius:50px;
+    margin-top:10px;
+
+  }
+  .crater-stats .payout-value img {
+      display:inline-block !important;
+  }
+  .img-crater {
+    width:70px;
+    margin:10px 10px 10px 0;
+    display:inline-block !important;
+
+  }
+  .action-container {
+    color:#fff;
+    background-color:#2b2b58;
+        -webkit-box-shadow: -1px 10px 31px 0px rgba(0,0,0,0.5) !important;
+    -moz-box-shadow: -1px 10px 31px 0px rgba(0,0,0,0.5) !important;
+    box-shadow: -1px 10px 31px 0px rgba(0,0,0,0.5) !important;
+
+  }
+
+  .action-container div.locked-price {
+  }
+  .action-container div.locked-price strong {
+  }
+  .action-container div.status-price {
+    font-size:14pt;
+
+  }
+  .action-container div.status-price strong {
+    font-size:14pt;
+
+  }
+  .action-container div.last-price {
+  }
+
+  .action-container div.last-price strong {
+  }
+
+</style>
+<!-- Core -->
+<script src="/static/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/static/assets/vendor/popper/popper.min.js"></script>
+<script src="/static/assets/vendor/bootstrap/bootstrap.min.js"></script>
+<script src="/static/assets/vendor/headroom/headroom.min.js"></script>
+<!-- Optional JS -->
+<script src="/static/assets/vendor/onscreen/onscreen.min.js"></script>
+<script src="/static/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<!-- Argon JS -->
+<script src="/static/assets/js/argon.js?v=1.1.0"></script>
+<script>
+  $(document).ready(function(){
+
+    $('.card-slider').slick({
+      dots:false,
+      arrows:true,
+      infinite:true,
+      centerMode: true,
+      centerPadding: '10px',
+      slidesToShow: 3,
+      variableWidth:true,
+      responsive: [
         {
-          let t = this.remaining_time;
-          if (t<0) { return false; }
-          var seconds = Math.floor((t / 1000) % 60).toString();
-          var minutes = Math.floor((t / 1000 / 60) % 60).toString();
-          var hours = Math.floor((t / (1000 * 60 * 60)) % 24).toString();
-          var days = Math.floor(t / (1000 * 60 * 60 * 24)).toString();
-          if (hours.length == 1) hours = '0' + hours;
-          if (minutes.length == 1) minutes = '0' + minutes;
-          if (seconds.length == 1) seconds = '0' + seconds;
-
-          return hours + ':' + minutes + ':' + seconds;
+          breakpoint: 900,
+          settings: {
+            arrows: true,
+            centerMode: true,
+            centerPadding: '10px',
+            slidesToShow: 3,
+            dots:false,
+          }
         },
-      },
-      methods: {
-        get_fingerprint: function()
-        {
-          this.user_fingerprint = new Fingerprint({canvas: true}).get();
-          console.log('user_fingerprint: ' + this.user_fingerprint);
-        },
-        update_btc: function()
-        {
-           $.getJSON('https://api.coindesk.com/v1/bpi/currentprice/USD.json', (data)=> {
-                this.btc_price = data.bpi.USD.rate;
-                console.log('btc_price: ' + data.bpi.USD.rate);
-            });
-        },
-        update_time: function()
-        {
-          this.remaining_time = this.end_time - Date.parse(new Date());
-          let t = this.get_remaining_time;
-          this.time_ticker = t;
-          if (!t) clearInterval(this.time_interval);
-        }
-      },
-      mounted: function(){
-        let d = new Date();
-        this.time_interval = setInterval(()=>{
-          this.update_time();
-          //this.update_btc();
-        },1000);
-        this.get_fingerprint();
-      }
-    })
-  </script>
 
-  <style>
-    .active-card {
-      padding:50px;
-      position:relative;
-      bottom:50px;
+      ]
+    });
+
+
+
+    let remaining_time,d,minute,second;
+
+    function reset_timer()
+    {
+      d = new Date();
+      minute = d.getMinutes();
+      second = d.getSeconds();
+      hours = 0;
+      remaining_time = (60*5*1000) - ((minute % 5) * 60 * 1000) - (second * 1000);
     }
-  </style>
-  <!-- Core -->
-  <script src="/static/assets/vendor/jquery/jquery.min.js"></script>
-  <script src="/static/assets/vendor/popper/popper.min.js"></script>
-  <script src="/static/assets/vendor/bootstrap/bootstrap.min.js"></script>
-  <script src="/static/assets/vendor/headroom/headroom.min.js"></script>
-  <!-- Optional JS -->
-  <script src="/static/assets/vendor/onscreen/onscreen.min.js"></script>
-  <script src="/static/assets/vendor/nouislider/js/nouislider.min.js"></script>
-  <script src="/static/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-  <!-- Argon JS -->
-  <script src="/static/assets/js/argon.js?v=1.1.0"></script>
-  <script>
-          $(document).ready(function(){
-          let socket = new WebSocket('wss://api.gemini.com/v1/marketdata/BTCUSD');
-          socket.onerror = function(error) {
-            console.log('WebSocket Error: ' + error);
-          };
 
-          socket.onopen = function(event) {
-            console.log("Connected to Gemini Sandbox API.");
-          };
 
-          socket.onmessage = function(event) {
-            let o = JSON.parse(event.data);
-            let price = o.events[0].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            $("#btc-price").text(price);
-          };
+    function get_remaining_time()
+    {
+      let t = remaining_time;
+      if (t<0) { return false; }
+      let seconds = Math.floor((t / 1000) % 60).toString();
+      let minutes = Math.floor((t / 1000 / 60) % 60).toString();
+      if (minutes.length == 1) minutes = '0' + minutes;
+      if (seconds.length == 1) seconds = '0' + seconds;
+      let hours = '00';
+      return hours + ':' + minutes + ':' + seconds;
+    }
 
-          socket.onclose = function(event) {
-            console.log('Disconnected.');
-          };
+    let i = setInterval(()=>{
+      $('.active-card .time-ticker, .ticker-right .time-ticker').text(get_remaining_time())
+      if (remaining_time > 0) {
+        remaining_time -=1000;
+      } else {
+        reset_timer();
+      }
+    },1000);
 
-      });
-  </script>
+
+    console.log('Loading gemini websocket:')
+    let socket = new WebSocket('wss://api.gemini.com/v1/marketdata/BTCUSD');
+    socket.onerror = function(error) {
+      console.log('WebSocket Error: ' + error);
+    };
+
+    socket.onopen = function(event) {
+      console.log("Connected to Gemini Sandbox API.");
+    };
+
+    socket.onmessage = function(event) {
+      let o = JSON.parse(event.data);
+      let price = o.events[0].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      $("#btc-price").text(price);
+    };
+
+    socket.onclose = function(event) {
+      console.log('Disconnected.');
+    };
+
+  });
+</script>
 
 </body>
 </html>
