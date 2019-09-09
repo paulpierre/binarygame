@@ -8,7 +8,7 @@ from models import Transaction, User, Pool
 
 # Data to initialize database with
 
-TRANSACTIONS = [
+TRANSACTIONS=[
 
     # Some deposits for the users
     {
@@ -94,7 +94,7 @@ TRANSACTIONS = [
     },
 ]
 
-POOLS = [
+POOLS=[
     {
         "pool_hash": "967b83",
         "pool_pair": "btcusd",
@@ -147,7 +147,7 @@ POOLS = [
 ]
 
 
-USERS = [
+USERS=[
     {
         "user_fingerprint": "3f2f4295a5eb6ad967b832d35e048852",
         "user_email": "barry@hbo.com",
@@ -225,7 +225,7 @@ USERS = [
 db.create_all()
 
 for user in USERS:
-    u = User(
+    u=User(
         user_fingerprint=user.get("user_fingerprint"),
         user_email=user.get("user_email"),
         user_password=user.get("user_password"),
@@ -246,13 +246,13 @@ for user in USERS:
         user_tcreate=user.get("user_tcreate"),
         user_tmodified=user.get("user_tmodified"),
         user_tlogin=user.get("user_tlogin"),
-        user_tconfirm = user.get("user_tconfirm")
+        user_tconfirm=user.get("user_tconfirm")
     )
     db.session.add(u)
 
 for pool in POOLS:
-    p = Pool(
-        pool_hash = pool.get("pool_hash"),
+    p=Pool(
+        pool_hash=pool.get("pool_hash"),
         pool_pair=pool.get("pool_pair"),
         pool_timeframe=pool.get("pool_timeframe"),
         pool_locked_price=pool.get("pool_locked_price"),
@@ -271,18 +271,18 @@ for pool in POOLS:
     db.session.add(p)
 
 for tx in TRANSACTIONS:
-    t = Transaction(
-        user_id = tx.get("user_id"),
-        pool_id = tx.get("pool_id"),
-        pool_hash = tx.get("pool_hash"),
-        transaction_amount_buy = tx.get("transaction_amount_buy"),
-        transaction_amount_sell = tx.get("transaction_amount_sell"),
-        transaction_is_deposit = tx.get("transaction_is_deposit"),
-        transaction_wallet_to = tx.get("transaction_wallet_to"),
-        transaction_wallet_from = tx.get("transaction_wallet_from"),
-        transaction_status = tx.get("transaction_status"),
-        transaction_tcreate = tx.get("transaction_tcreate"),
-        transaction_tmodified = tx.get("transaction_tmodified"),
+    t=Transaction(
+        user_id=tx.get("user_id"),
+        pool_id=tx.get("pool_id"),
+        pool_hash=tx.get("pool_hash"),
+        transaction_amount_buy=tx.get("transaction_amount_buy"),
+        transaction_amount_sell=tx.get("transaction_amount_sell"),
+        transaction_is_deposit=tx.get("transaction_is_deposit"),
+        transaction_wallet_to=tx.get("transaction_wallet_to"),
+        transaction_wallet_from=tx.get("transaction_wallet_from"),
+        transaction_status=tx.get("transaction_status"),
+        transaction_tcreate=tx.get("transaction_tcreate"),
+        transaction_tmodified=tx.get("transaction_tmodified"),
     )
     db.session.add(t)
 
@@ -294,7 +294,7 @@ db.session.commit()
 """
     # Add the notes for the person
     for note in user.get("notes"):
-        content, timestamp = note
+        content, timestamp=note
         p.notes.append(
             Transaction(
                 content=content,

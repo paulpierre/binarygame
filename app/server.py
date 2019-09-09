@@ -8,20 +8,18 @@ Main module of the server file
  - redis-server --daemonize yes
 
 """
-#from google.appengine.ext import vendor
-#vendor.add("lib")
-# 3rd party modules
+
 
 from flask import render_template, redirect, Response, url_for, request
-
+from gmail import Gmail
 from models import User
-from form import LoginForm, RegisterForm
+from form import LoginForm, RegisterForm, ConfirmationForm
 # Local modules
 import config, json
+from datetime import datetime
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, login_required, login_user, current_user
-from flask_wtf import FlaskForm
-from wtforms import BooleanField, StringField, validators,PasswordField
+
 from tokens import generate_confirmation_token, confirm_token, pool_hasher, referral_hasher
 
 
@@ -37,13 +35,17 @@ login_manager.login_view = "home"
 # Read the swagger.yml file to configure the endpoints
 connex_app.add_api("swagger.yml")
 
-def confirm_required(func):
-    def wrapper():
-        #print 'current user_status: %s' % str(current_user.user_status)
-        if current_user.user_status == 0:
-            return redirect("/confirm", code=302)
-        func()
-    return wrapper
+
+# def confirm_required(func):
+#     print '### confirm_required()'
+#     print 'current_user: %s' % str(current_user)
+#
+#
+#     def wrapper_confirm_required(*args, **kwargs):
+#
+#         return func(*args, **kwargs)
+#
+#     return wrapper_confirm_required
 
 @login_manager.user_loader
 def user_loader(user_id):
@@ -51,6 +53,7 @@ def user_loader(user_id):
 
 # Create a URL route in our application for "/"
 @connex_app.route("/")
+@connex_app.route("/home")
 def home():
     """
     This function just responds to the browser URL
@@ -60,7 +63,59 @@ def home():
     """
     login_form = LoginForm()
     register_form = RegisterForm()
-    return render_template("home.html",login_form=login_form,register_form=register_form)
+    return render_template("home.html", login_form=login_form, register_form=register_form)
+
+
+def send_confirmation(user_email=None):
+    print 'sending email confirmation'
+    if user_email is None:
+        print 'Email not provided for send_confirmation()'
+        Response("Email address not provided", 200)
+
+
+
+    token = generate_confirmation_token(user_email)
+    url = "http://0.0.0.0:5000/confirm?confirm_token=%s&user_email=%s" % (token,user_email)
+    gmail = Gmail(gmail_user="binarycryptobot@gmail.com",gmail_password="00g4B00g4!")
+    gmail.mail_from_name = "Marginbox Crypto Bot"
+    gmail.mail_from = "binarycryptobot@gmail.com"
+    gmail.mail_subject = "Please confirm your account"
+    gmail.mail_to = user_email
+    gmail.mail_body = "<strong>Thank you for signing up with Marginbox</strong><br>Click the URL below to activate your account <a href='%s'>%s</a>" % (url,url)
+    gmail.send()
+
+@connex_app.route("/confirm", methods=["GET","POST"])
+def confirm():
+
+    form = ConfirmationForm(request.form)
+    print json.dumps(request.form, indent=4)
+
+    if form.validate_on_submit():
+        print 'form validated'
+        user_email = request.form['user_email'].encode('utf-8')
+        user_confirmation_code = request.form['user_confirmation_code'].encode('utf-8')
+        user = User.query.filter(User.user_email == user_email).one_or_none()
+
+        is_valid = confirm_token(user_confirmation_code)
+        print 'is_valid: %s' % str(is_valid)
+        if not is_valid:
+            return Response("Token is invalid or has expired. Please request another.", 401)
+
+        if user:
+            print 'is User! Setting status!'
+            user.user_status = 1
+            user.user_tlogin = datetime.utcnow()
+            user.user_tconfirm = datetime.utcnow()
+            config.db.session.add(user)
+            config.db.session.commit()
+            return Response("User email is confirmed", 200)
+        else:
+            return Response("Invalid email, please register", 401)
+
+
+    else:
+        return render_template("confirm.html", confirmation_form=form)
+
 
 @login_manager.unauthorized_handler
 def unauthorized():
@@ -98,17 +153,17 @@ def login():
        return Response("Authentication failed!", 498)
 
 
-@connex_app.route("/register", methods=["GET","POST"])
+@connex_app.route("/register", methods=["GET", "POST"])
 def register():
 
     form = RegisterForm()
-    print json.dumps(request.form, indent=4)
+    print 'FORM SUBMIT DATA: %s' % json.dumps(request.form, indent=4)
 
     print 'validating form'
     if form.validate_on_submit():
         print 'form validated'
 
-        if  'user_email' not in request.form or \
+        if 'user_email' not in request.form or \
             'user_password' not in request.form or \
             'user_name' not in request.form or \
             'user_timezone' not in request.form or \
@@ -141,13 +196,13 @@ def register():
             user_email=user_email,
             user_password=bcrypt.generate_password_hash(user_password),
             user_fingerprint=user_fingerprint,
-            user_register_ip = user_ip_address,
-            user_last_ip = user_ip_address,
-            user_is_authenticated = True,
-            user_register_country = user_country,
-            user_register_region =user_region,
-            user_register_city = user_city,
-            user_register_timezone = user_register_timezone,
+            user_register_ip=user_ip_address,
+            user_last_ip=user_ip_address,
+            user_is_authenticated=True,
+            user_register_country=user_country,
+            user_register_region=user_region,
+            user_register_city=user_city,
+            user_register_timezone=user_register_timezone,
 
         )
         config.db.session.add(user)
@@ -157,6 +212,7 @@ def register():
         print 'user ID: %s user_referral_code: %s' % (str(user.user_id),user.user_referral_code)
         config.db.session.add(user)
         config.db.session.commit()
+        send_confirmation(user.user_email)
         return Response("Login success", 200)
     else:
         print 'form not validated!!'
@@ -177,12 +233,13 @@ def logout():
     return redirect("/home", code=302)
 
 
-@connex_app.route("/game")
 @login_required
-@confirm_required
+@connex_app.route("/game")
 def game_home():
+    if current_user.user_status == 0:
+        return redirect("/confirm", code=302)
     print 'current user: %s ' % current_user
-    return render_template("game.html",user=current_user)
+    return render_template("game.html", user=current_user)
 
 # Create a URL route in our application for "/people"
 @connex_app.route("/user")

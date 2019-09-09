@@ -1,6 +1,7 @@
 from datetime import datetime
 from config import db, ma
 from marshmallow import fields
+from sqlalchemy.sql import func
 #from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMixin, login_required
 
 # class Role(db.Model, RoleMixin):
@@ -38,11 +39,11 @@ class User(db.Model):
     user_register_timezone = db.Column(db.String(5))
     user_last_ip = db.Column(db.String(15))
     user_referral_code = db.Column(db.String(100),unique=True) # short hash of their email address
-    user_tcreate = db.Column(db.DateTime, default=datetime.utcnow)
-    user_tmodified = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    user_tlogin = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    user_tconfirm = db.Column(db.DateTime, default=None)
-    user_is_authenticated = db.Column(db.Boolean,default=False)
+    user_tcreate = db.Column(db.DateTime(timezone=True), default=func.now())
+    user_tmodified = db.Column(db.DateTime(timezone=True), default=func.now(), onupdate=func.now())
+    user_tlogin = db.Column(db.DateTime(timezone=True), default=func.now(), onupdate=func.now())
+    user_tconfirm = db.Column(db.DateTime(timezone=True), default=None)
+    user_is_authenticated = db.Column(db.Boolean, default=False)
 
     # roles = db.relationship(
     #     "Role",
@@ -96,8 +97,8 @@ class Transaction(db.Model):
     transaction_wallet_to = db.Column(db.String(100), nullable=True)
     transaction_wallet_from = db.Column(db.String(100), nullable=True)
     transaction_status = db.Column(db.Integer, default=0)                   # Determines if this transaction is win/loss 0 = in progress 1 = win -1 = loss 2 = deposited
-    transaction_tcreate = db.Column(db.DateTime, default=datetime.utcnow)
-    transaction_tmodified = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    transaction_tcreate = db.Column(db.DateTime(timezone=True), default=func.now())
+    transaction_tmodified = db.Column(db.DateTime(timezone=True), default=func.now(), onupdate=func.now())
 
     # pool = db.relationship(
     #     "Pool",
@@ -134,14 +135,14 @@ class Pool(db.Model):
     pool_fee_type = db.Column(db.Integer,nullable=False)
     pool_fee_amount = db.Column(db.Float(precision=2,asdecimal=True),nullable=False)
     pool_status = db.Column(db.Integer,nullable=False) # 0 = not started 1 = open  2 = confirming  3 = closed  4 = under review
-    pool_tcreate = db.Column(db.DateTime, default=datetime.utcnow)
-    pool_tmodified = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    pool_start = db.Column(db.DateTime, default=None, nullable=True)
-    pool_topen = db.Column(db.DateTime, default=None, nullable=True)
-    pool_tlock = db.Column(db.DateTime, default=None, nullable=True)
-    pool_texpire = db.Column(db.DateTime, default=None, nullable=True)
-    pool_tclose = db.Column(db.DateTime, default=None, nullable=True)
-    pool_treview = db.Column(db.DateTime, default=None, nullable=True)
+    pool_tcreate = db.Column(db.DateTime(timezone=True), default=func.now())
+    pool_tmodified = db.Column(db.DateTime(timezone=True), default=func.now(), onupdate=func.now())
+    pool_start = db.Column(db.DateTime(timezone=True), default=None, nullable=True)
+    pool_topen = db.Column(db.DateTime(timezone=True), default=None, nullable=True)
+    pool_tlock = db.Column(db.DateTime(timezone=True), default=None, nullable=True)
+    pool_texpire = db.Column(db.DateTime(timezone=True), default=None, nullable=True)
+    pool_tclose = db.Column(db.DateTime(timezone=True), default=None, nullable=True)
+    pool_treview = db.Column(db.DateTime(timezone=True), default=None, nullable=True)
 
 
 
