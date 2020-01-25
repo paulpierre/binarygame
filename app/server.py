@@ -2,11 +2,14 @@
 """
 Main module of the server file
 
+ Setup
  - virtualenv --python=/usr/local/Cellar/python@2/2.7.16/bin/python --clear  --always-copy --no-wheel --no-pip --no-setuptools --no-download venv
  - pip install -t venv/lib -r requirements.txt
+
+ Running
  - source venv/bin/activate
  - redis-server --daemonize yes
-
+ - python server.py
 """
 
 
@@ -236,8 +239,11 @@ def logout():
 @login_required
 @connex_app.route("/game")
 def game_home():
-    if current_user.user_status == 0:
-        return redirect("/confirm", code=302)
+    try:
+        if current_user.user_status == 0:
+            return redirect("/confirm", code=302)
+    except Exception:
+        pass
     print 'current user: %s ' % current_user
     return render_template("game.html", user=current_user)
 
