@@ -79,12 +79,12 @@ def send_confirmation(user_email=None):
 
     token = generate_confirmation_token(user_email)
     url = "http://0.0.0.0:5000/confirm?confirm_token=%s&user_email=%s" % (token,user_email)
-    gmail = Gmail(gmail_user="binarycryptobot@gmail.com",gmail_password="00g4B00g4!")
-    gmail.mail_from_name = "Marginbox Crypto Bot"
-    gmail.mail_from = "binarycryptobot@gmail.com"
+    gmail = Gmail(gmail_user="***********@gmail.com",gmail_password="*********!")
+    gmail.mail_from_name = "Crypto Bot"
+    gmail.mail_from = "***********@gmail.com"
     gmail.mail_subject = "Please confirm your account"
     gmail.mail_to = user_email
-    gmail.mail_body = "<strong>Thank you for signing up with Marginbox</strong><br>Click the URL below to activate your account <a href='%s'>%s</a>" % (url,url)
+    gmail.mail_body = "<strong>Thank you for signing up with **************</strong><br>Click the URL below to activate your account <a href='%s'>%s</a>" % (url,url)
     gmail.send()
 
 @connex_app.route("/confirm", methods=["GET","POST"])
